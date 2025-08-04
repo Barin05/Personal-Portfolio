@@ -17,7 +17,7 @@ export const experiences = [
   },
   {
     title: 'QualityEng Intern',
-    company_name: 'Azerbaijan Airlines',
+    company_name: 'Azerbaijani Airlines',
     icon: azal,
     iconBg: '#ffffffff',
     date: 'Jun 2023 - Aug 2023',

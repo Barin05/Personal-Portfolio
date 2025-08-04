@@ -15,9 +15,9 @@ const projects = [
   },
   {
     id: 2,
-    title: "Orbit Analytics Dashboard",
+    title: "Racing Quadrotor Drone",
     description:
-      "Full-state control system for a racing quadrotor drone using control techniques .",
+      "Full-state control system for a racing quadrotor drone using control techniques.",
     image: drone,
     tags: ["Python", "MATLAB", "SymPy"],
     demoUrl: "#",
@@ -25,7 +25,7 @@ const projects = [
   },
   {
     id: 3,
-    title: "This Website",
+    title: "Portfolio Website",
     description:
       "Full-feature personal portfolio website with custom-made star background and first web-design project.",
     image: website,
@@ -103,7 +103,7 @@ export const ProjectsSection = () => {
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
             target="_blank"
-            href="https://github.com/machadop1407"
+            href="https://github.com/Barin05"
           >
             Check My Github <ArrowRight size={16} />
           </a>
