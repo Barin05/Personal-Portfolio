@@ -1,4 +1,6 @@
 import { Briefcase, Code, Cog, PencilRuler } from "lucide-react";
+import resumePDF from "../assets/Riyad_Babayev_Resume.pdf";
+
 
 
 export const AboutSection = () => {
@@ -29,8 +31,14 @@ export const AboutSection = () => {
                             <a href="#contact" className="cosmic-button">
                                 Contact Me
                             </a>
-                            <a href="" className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300">
-                                Download Resume
+                            <a
+                                href={resumePDF}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                                aria-label="Open Riyad Babayev Resume (PDF)"
+                            >
+                                View Resume
                             </a>
                         </div>
                     </div>
@@ -79,6 +87,21 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
+                </div>
+
+                <h2 className="text-3xl text-primary font-bold mb-4">Education</h2>
+                <div className="space-y-2">
+                    <div>
+                    <h3 className="text-xl font-semibold">
+                        University of Illinois Urbana-Champaign
+                    </h3>
+                    <p className="text-sm italic">
+                        B.S. in Aerospace Engineering, Minor in Computer Science
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                        Champaign, IL — Expected May 2026
+                    </p>
+                    </div>
                 </div>
 
             </div>

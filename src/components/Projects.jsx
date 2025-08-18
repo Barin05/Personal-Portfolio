@@ -3,6 +3,7 @@ import skid from '../assets/skid.png';
 import website from '../assets/website.png';
 import drone from '../assets/drone.png';
 
+
 const projects = [
   {
     id: 1,
@@ -10,7 +11,7 @@ const projects = [
     description: "A project focused on the design and 3D print of a 24” Ethane Trap Skid for a client.",
     image: skid,
     tags: ["AutoCAD", "Cura", "3D Printing"],
-    demoUrl: "#",
+    demoUrl: "/skid",
     githubUrl: "#",
   },
   {
@@ -20,7 +21,7 @@ const projects = [
       "Full-state control system for a racing quadrotor drone using control techniques.",
     image: drone,
     tags: ["Python", "MATLAB", "SymPy"],
-    demoUrl: "#",
+    demoUrl: "/drone",
     githubUrl: "#",
   },
   {
@@ -51,9 +52,10 @@ export const ProjectsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, key) => (
-            <div
+            <a
               key={key}
-              className="group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
+              href={project.demoUrl}
+              className="block group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
             >
               <div className="h-48 overflow-hidden">
                 <img
@@ -79,33 +81,27 @@ export const ProjectsSection = () => {
                 <div className="flex justify-between items-center">
                   <div className="flex space-x-3">
                     <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                    >
-                      <ExternalLink size={20} />
-                    </a>
-                    <a
                       href={project.githubUrl}
                       target="_blank"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
+                      onClick={e => e.stopPropagation()}
                     >
                       <Github size={20} />
                     </a>
                   </div>
+                  <span className="text-xs opacity-70">Click for more info</span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
         <div className="text-center mt-12">
           <a
             className="cosmic-button w-fit flex items-center mx-auto gap-2"
-            target="_blank"
-            href="https://github.com/Barin05"
+            href="/projects"
           >
-            Check My Github <ArrowRight size={16} />
+            View All Projects <ArrowRight size={16} />
           </a>
         </div>
       </div>

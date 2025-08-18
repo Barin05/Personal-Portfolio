@@ -1,31 +1,52 @@
 import {
+  Github,
   Instagram,
   Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Twitch,
-  Twitter,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+// If you use a toast hook (e.g., shadcn), import it here and replace alert() calls below.
 
 export const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+    try {
+      const form = e.currentTarget;
+      const data = new FormData(form);
+
+      // TODO: Replace with your Formspree form ID
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/xanbzgnv"; 
+
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
       });
+
+      if (res.ok) {
+        // Clear the form
+        form.reset();
+        // Replace alert with your toast util if available
+        alert("Message sent! Thanks for reaching out. I'll get back to you soon.");
+      } else {
+        alert("Something went wrong sending your message. Please try again or email me directly.");
+      }
+    } catch (err) {
+      alert("Network error. Please try again later or email me directly.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -94,14 +115,11 @@ export const ContactSection = () => {
                 <a href="https://www.linkedin.com/in/riyad-babayev-0b7986226/" target="_blank">
                   <Linkedin />
                 </a>
-                <a href="#" target="_blank">
-                  <Twitter />
-                </a>
                 <a href="https://www.instagram.com/ba.ri___n?igsh=MXBueG54YmU3dmdkeA%3D%3D&utm_source=qr" target="_blank">
                   <Instagram />
                 </a>
-                <a href="#" target="_blank">
-                  <Twitch />
+                <a href="https://github.com/Barin05" target="_blank">
+                  <Github />
                 </a>
               </div>
             </div>
@@ -109,11 +127,10 @@ export const ContactSection = () => {
 
           <div
             className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
           >
             <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
@@ -127,7 +144,7 @@ export const ContactSection = () => {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Riyad Babayev..."
                 />
               </div>
@@ -145,7 +162,7 @@ export const ContactSection = () => {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="goat@gmail.com"
                 />
               </div>
@@ -162,7 +179,7 @@ export const ContactSection = () => {
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
                 />
               </div>
