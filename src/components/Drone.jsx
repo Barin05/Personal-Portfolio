@@ -3,7 +3,7 @@ import { StarBackground } from "./StarBackground";
 import { ThemeToggle } from "./ThemeToggle";
 import { SmallNavbar } from "./SmallNavbar";
 // ⬇️ Add drone images later (uncomment + point to real files)
-// import simStep from "../assets/drone_step.png";
+import drone from '../assets/drone.png';
 // import simTrack from "../assets/drone_track.png";
 // import quadIso from "../assets/drone_iso.png";
 // import gainSweep from "../assets/drone_gains.png";
@@ -40,7 +40,7 @@ const BOM_ITEMS = [
 
 // Optional gallery: keep empty to hide the section; add as needed.
 const GALLERY = [
-  // { src: simStep, alt: "Attitude step response" },
+  { src: drone, alt: "Track Overview" },
   // { src: simTrack, alt: "3D trajectory tracking" },
   // { src: quadIso, alt: "Quadrotor geometry (X‑frame)" },
   // { src: gainSweep, alt: "Gain sweep metrics" },
@@ -136,22 +136,6 @@ export default function Drone() {
         </ul>
       </Section>
 
-      <Section id="gallery" title="Gallery">
-        {GALLERY.length > 0 ? (
-          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {GALLERY.map((img, i) => (
-              <button key={img.src} onClick={() => open(i)} className="relative aspect-[4/3] overflow-hidden rounded-xl border bg-card card-hover">
-                {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element */}
-                <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border bg-card p-4 text-sm opacity-80">
-            No images yet. Import your sim figures or model renders at the top of this file and add them to <code>GALLERY</code>.
-          </div>
-        )}
-      </Section>
 
       <Section id="video" title="Video">
         {/* Render a local MP4 if VIDEO_SRC is defined; else render YouTube if YT_ID is defined */}

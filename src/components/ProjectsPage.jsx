@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { cn } from "../lib/utils";
+import { Menu, X } from "lucide-react";
 import { StarBackground } from "./StarBackground";
 import { ThemeToggle } from "./ThemeToggle";
-import { SmallNavbar } from "./SmallNavbar";
 import { Github } from "lucide-react";
 import skid from "../assets/skid.png";
 import website from "../assets/website.png";
@@ -66,7 +67,15 @@ const PROJECTS = [
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState("All");
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
+    <>
     <main className="relative mx-auto max-w-6xl px-4 py-12">
         {/* Background behind content */}
         <div className="pointer-events-none absolute inset-0 -z-10">
@@ -75,8 +84,30 @@ export default function ProjectsPage() {
 
         {/* Top bar */}
         <div className="mb-8 flex flex-col items-center justify-center gap-4">
-          <SmallNavbar />
-          <ThemeToggle />
+          <nav
+            className={cn(
+              "fixed top-0 left-0 w-full z-40 transition-all duration-300 backdrop-blur-md border-b shadow-xs",
+              isScrolled ? "bg-background/90" : "bg-background/50"
+            )}
+          >
+            <div className="container h-16 md:h-20 flex items-center justify-between">
+              <Link className="text-xl font-bold text-primary flex items-center" to="/">
+                <span className="relative z-10">
+                  <span className="text-glow text-foreground"> Riyad Babayev </span> Portfolio
+                </span>
+              </Link>
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/"
+                  className="px-4 py-2 rounded-full bg-primary text-white font-medium hover:bg-primary/80 transition-colors duration-300"
+                >
+                  Back to Main Page
+                </Link>
+                <ThemeToggle />
+              </div>
+            </div>
+          </nav>
+          <div aria-hidden className="h-16 md:h-20" />
         </div>
       <header className="mb-6 text-center">
         <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
@@ -149,7 +180,8 @@ export default function ProjectsPage() {
           </a>
         ))}
       </section>
-      <Footer />
     </main>
+    <Footer />
+    </>
   );
 }

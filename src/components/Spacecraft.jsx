@@ -13,6 +13,7 @@ import { SmallNavbar } from "./SmallNavbar";
 import scVideo from "../assets/spacecraft.mp4";
 const VIDEO_SRC = scVideo;
 import spacecraft_photo from '../assets/spacecraft_photo.png';
+import refLetter from "../assets/DP3-Letter.pdf";
 import { Footer } from "./Footer";
 
 // OR YouTube embed
@@ -35,6 +36,7 @@ const ARTIFACTS = [
   { item: "LQR controller implementation", qty: "1", note: "Wheel torque inputs; weight presets" },
   { item: "Estimator block (optional)", qty: "1", note: "MEKF/complementary structure with star tracker updates" },
   { item: "Plots &amp; simulation scripts", qty: "10+", note: "Step/hold disturbance tests, wheel torques" },
+  { item: "Professor reference letter (PDF)", qty: "1", note: "Project endorsement; see buttons above." },
 ];
 
 // Optional gallery: keep empty to hide the section; add as needed.
@@ -78,6 +80,16 @@ export default function Spacecraft() {
                 <Meta k="Timeline" v="4 weeks" />
                 <Meta k="Role" v="Modeling · Controls · Estimation" />
                 <Meta k="Tools" v="Python • MATLAB • SymPy • Matplotlib" />
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={refLetter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-full bg-primary text-white font-medium hover:bg-primary/80 transition-colors duration-300"
+                >
+                  View Reference Letter (PDF)
+                </a>
               </div>
             </div>
             <div>

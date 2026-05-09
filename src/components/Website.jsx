@@ -67,7 +67,7 @@ export default function Website() {
                 ))}
               </div>
               <div className="mt-6 flex flex-wrap gap-4 text-sm">
-                <Meta k="Timeline" v="~2 weeks (ongoing polish)" />
+                <Meta k="Timeline" v="3 weeks" />
                 <Meta k="Role" v="Design · Frontend · Deployment" />
                 <Meta k="Tools" v="React • Vite • Tailwind • Hostinger • GitHub" />
               </div>
@@ -121,23 +121,6 @@ export default function Website() {
           <li>Fast dev/build times with Vite</li>
           <li>Deployed via Hostinger + GitHub CI/CD</li>
         </ul>
-      </Section>
-
-      <Section id="gallery" title="Gallery">
-        {GALLERY.length > 0 ? (
-          <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-            {GALLERY.map((img, i) => (
-              <button key={img.src} onClick={() => open(i)} className="relative aspect-[4/3] overflow-hidden rounded-xl border bg-card card-hover">
-                {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element */}
-                <img src={img.src} alt={img.alt} className="w-full h-full object-cover" />
-              </button>
-            ))}
-          </div>
-        ) : (
-          <div className="rounded-xl border bg-card p-4 text-sm opacity-80">
-            No images yet. Import screenshots at the top and add them to <code>GALLERY</code>.
-          </div>
-        )}
       </Section>
 
       <Section id="build" title="Build Process (Step‑by‑Step)">

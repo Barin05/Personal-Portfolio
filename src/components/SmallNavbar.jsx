@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 
 
 const navItems = [
+    
 ];
 
 export const SmallNavbar = () => {
@@ -43,6 +44,12 @@ export const SmallNavbar = () => {
                             {item.name}
                         </Link>
                     ))}
+                    <Link 
+                      to="/projects"
+                      className="px-4 py-2 rounded-full bg-primary text-white font-medium hover:bg-primary/80 transition-colors duration-300"
+                    >
+                      Back to All Projects
+                    </Link>
                 </div>
 
             </div>
