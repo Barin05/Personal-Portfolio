@@ -9,14 +9,25 @@ import skid from "../assets/skid.png";
 import website from "../assets/website.png";
 import drone from "../assets/drone.png";
 import maze from "../assets/maze.jpg";
-import spacecraft_photo from '../assets/spacecraft_photo.png';
+import spacecraft_photo from '../assets/Spacecraft_photo.png';
 import { Footer } from "./Footer";
+import kestrel from '../assets/skybetterrender.jpg';
 
 const PROJECTS = [
   {
+    id: 0,
+    title: "Kestrel — Naval Strike Fighter",
+    description: "Propulsion lead & landing gear lead for a carrier-capable single-engine strike fighter. GasTurb engine modeling, supersonic inlet sizing, and carrier landing gear design.",
+    image: kestrel,
+    tags: ["GasTurb", "Python", "Aircraft Design", "MATLAB"],
+    demoUrl: "/senior-design",
+    githubUrl: "#",
+    category: "AE",
+  },
+  {
     id: 1,
-    title: "24” Ethane Trap Skid",
-    description: "A project focused on the design and 3D print of a 24” Ethane Trap Skid for a client.",
+    title: '24” Ethane Trap Skid',
+    description: 'A project focused on the design and 3D print of a 24” Ethane Trap Skid for a client.',
     image: skid,
     tags: ["AutoCAD", "Cura", "3D Printing"],
     demoUrl: "/skid",

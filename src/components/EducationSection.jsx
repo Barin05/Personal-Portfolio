@@ -13,7 +13,7 @@ const EducationSection = () => {
             B.S. in Aerospace Engineering, Minor in Computer Science
           </p>
           <p className="text-sm text-muted-foreground">
-            Champaign, IL — Expected May 2026
+            Champaign, IL — May 2026
           </p>
           <p className="text-sm text-muted-foreground">
             Relevant Coursework: Control Systems, Thermodynamics, Structures, Machine Learning

@@ -9,6 +9,8 @@ const skills = [
   { name: "CAESAR CX II", level: 80, category: "FEA" },
   { name: "Nozzle PRO", level: 85, category: "FEA" },
 
+  { name: "GasTurb", level: 85, category: "FEA" },
+
   // CAD
   { name: "AutoCAD", level: 80, category: "CAD" },
   { name: "NX Siemens", level: 75, category: "CAD" },

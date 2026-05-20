@@ -17,7 +17,7 @@ export const AboutSection = () => {
                     <div className="space-y-6">
 
                         <p className="text-muted-foreground">
-                            I’m an Aerospace Engineering senior with a passion for solving real-world problems through engineering, technology, and design.
+                            I’m an Aerospace Engineer with a passion for solving real-world problems through engineering, technology, and design.
                             With hands-on experience across aerospace, oil and gas, and tech industries.
                         </p>
                         <p className="text-muted-foreground, font-bold">
@@ -99,7 +99,7 @@ export const AboutSection = () => {
                         B.S. in Aerospace Engineering, Minor in Computer Science
                     </p>
                     <p className="text-sm text-muted-foreground">
-                        Champaign, IL — Expected May 2026
+                        Champaign, IL — May 2026
                     </p>
                     </div>
                 </div>

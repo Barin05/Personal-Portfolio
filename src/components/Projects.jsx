@@ -1,14 +1,24 @@
-import { ArrowRight, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import skid from '../assets/skid.png';
 import website from '../assets/website.png';
 import drone from '../assets/drone.png';
+import kestrel from '../assets/skybetterrender.jpg';
 
 
 const projects = [
   {
+    id: 0,
+    title: "Kestrel — Naval Strike Fighter",
+    description: "Propulsion lead & landing gear lead for a carrier-capable single-engine strike fighter senior design capstone.",
+    image: kestrel,
+    tags: ["GasTurb", "Python", "Aircraft Design"],
+    demoUrl: "/senior-design",
+    githubUrl: "#",
+  },
+  {
     id: 1,
-    title: "24” Ethane Trap Skid ",
-    description: "A project focused on the design and 3D print of a 24” Ethane Trap Skid for a client.",
+    title: '24" Ethane Trap Skid',
+    description: 'A project focused on the design and 3D print of a 24" Ethane Trap Skid for a client.',
     image: skid,
     tags: ["AutoCAD", "Cura", "3D Printing"],
     demoUrl: "/skid",
@@ -17,8 +27,7 @@ const projects = [
   {
     id: 2,
     title: "Racing Quadrotor Drone",
-    description:
-      "Full-state control system for a racing quadrotor drone using control techniques.",
+    description: "Full-state control system for a racing quadrotor drone using control techniques.",
     image: drone,
     tags: ["Python", "MATLAB", "SymPy"],
     demoUrl: "/drone",
@@ -27,8 +36,7 @@ const projects = [
   {
     id: 3,
     title: "Portfolio Website",
-    description:
-      "Full-feature personal portfolio website with custom-made star background and first web-design project.",
+    description: "Full-feature personal portfolio website with custom-made star background and first web-design project.",
     image: website,
     tags: ["React", "Tailwind", "JavaScript"],
     demoUrl: "#",
@@ -51,7 +59,7 @@ export const ProjectsSection = () => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, key) => (
+          {projects.slice(0, 3).map((project, key) => (
             <a
               key={key}
               href={project.demoUrl}
@@ -68,13 +76,13 @@ export const ProjectsSection = () => {
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
-                    <span className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
+                    <span key={tag} className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <h3 className="text-xl font-semibold mb-1"> {project.title}</h3>
+                <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   {project.description}
                 </p>

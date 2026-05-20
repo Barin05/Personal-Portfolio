@@ -15,7 +15,7 @@ export const HeroSection = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-                        Aerospace Engineering student with experience in mechanical design, coding, and project management. 
+                        Aerospace Engineer with experience in mechanical design, coding, and project management.
                         I build things that fly, things that move, and ideas that move worlds.
                     </p>
 

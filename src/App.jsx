@@ -8,6 +8,7 @@ import ProjectsPage from "./components/ProjectsPage";
 import Spacecraft from "./components/Spacecraft";
 import Maze from "./components/Maze";
 import Website from "./components/Website";
+import SeniorDesign from "./components/SeniorDesign";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/projects" element={<ProjectsPage/>} />
           <Route path="/maze" element={<Maze/>} />
           <Route path="/website" element={<Website/>} />
+          <Route path="/senior-design" element={<SeniorDesign/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
