@@ -1,87 +1,125 @@
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-
-import 'react-vertical-timeline-component/style.min.css';
-import { experiences } from '../constants'; // adjust the path if your experiences array lives elsewhere
-import PropTypes from 'prop-types';
-import { ThemeToggle } from './ThemeToggle';
-
-const ExperienceCard = ({ experience }) => {
-    if (!experience) return null;
-    const {
-        date = '',
-        iconBg = '#000',
-        icon = '',
-        company_name = '',
-        title = '',
-        points = [],
-    } = experience;
-
-    return (
-        <VerticalTimelineElement
-            contentStyle={{ background: "hsl(var(--card))", color: "hsl(var(--foreground))" }}
-            contentArrowStyle={{ borderRight: "7px solid hsl(var(--card))" }}
-            date={date}
-            iconStyle={{ background: iconBg }}
-            icon={
-                <div className="flex justify-center items-center w-full h-full">
-                    <img
-                        src={icon}
-                        alt={company_name}
-                        className="w-[60%] h-[60%] object-contain"
-                    />
-                </div>
-            }
-        >
-            <div>
-                <h3 className="text-secondary-foreground text-[24px] font-bold">{title}</h3>
-                <p className="text-secondary-foreground text-[16px] font-semibold opacity-60">{company_name}</p>
-                {Array.isArray(points) && points.length > 0 && (
-                    <ul className="mt-5 list-disc ml-5 space-y-2">
-                        {points.map((point, index) => (
-                            <li key={`experience-point-${index}`}
-                                className="text-muted-foreground text-[14px] pl-1 tracking-wider"
-                            >{point}</li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-        </VerticalTimelineElement>
-    );
-};
-
-ExperienceCard.propTypes = {
-    experience: PropTypes.shape({
-        date: PropTypes.string,
-        iconBg: PropTypes.string,
-        icon: PropTypes.string,
-        company_name: PropTypes.string,
-        title: PropTypes.string,
-        points: PropTypes.arrayOf(PropTypes.string),
-    }),
-};
+import { experiences } from "../constants";
 
 export const Experience = () => {
-    if (!Array.isArray(experiences)) {
-        console.error('experiences is not an array', experiences);
-        return <div className="mt-20">No experience data available.</div>;
-    }
-    return (
-        <section id="experience" className="py-24 px-4 relative">
-            <div className="container mx-auto max-w-5xl"> 
-                <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-                    Work <span className="text-primary">Experience</span>
-                </h2>
-                <div className="mt-20 flex flex-col">
-                    <VerticalTimeline lineColor="hsl(var(--foreground))">
-                        {experiences.map((experience, index) => (
-                            <ExperienceCard
-                                key={`experience-${index}`}
-                                experience={experience}
-                            />
-                        ))}
-                    </VerticalTimeline>
+  if (!Array.isArray(experiences)) return null;
+
+  return (
+    <section
+      id="experience"
+      className="py-24 px-4 relative"
+      style={{ background: "var(--ae-bg)" }}
+    >
+      <div className="container mx-auto max-w-5xl">
+        <div className="ae-eyebrow">Career</div>
+        <h2 className="ae-section-title" style={{ marginBottom: "56px" }}>
+          Work <span style={{ color: "var(--ae-accent)" }}>Experience</span>
+        </h2>
+
+        <div className="ae-timeline">
+          {experiences.map((exp, i) => (
+            <div key={i} className="ae-timeline-entry">
+              <div className="ae-timeline-dot" />
+
+              <div className="ae-timeline-card">
+                {/* Bracket corners */}
+                <span className="ae-corner ae-tl" />
+                <span className="ae-corner ae-br" />
+
+                {/* Header row */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "16px",
+                    marginBottom: "16px",
+                  }}
+                >
+                  {exp.icon && (
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        background: exp.iconBg || "#fff",
+                        borderRadius: "4px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                        overflow: "hidden",
+                      }}
+                    >
+                      <img
+                        src={exp.icon}
+                        alt={exp.company_name}
+                        style={{ width: "70%", height: "70%", objectFit: "contain" }}
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <h3
+                      style={{
+                        fontSize: "1rem",
+                        fontWeight: 700,
+                        color: "var(--ae-text)",
+                        marginBottom: "2px",
+                      }}
+                    >
+                      {exp.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "var(--ae-accent)",
+                        fontWeight: 600,
+                        marginBottom: "2px",
+                      }}
+                    >
+                      {exp.company_name}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: 600,
+                        letterSpacing: "0.08em",
+                        color: "var(--ae-muted)",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {exp.date}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Bullet points */}
+                {Array.isArray(exp.points) && exp.points.length > 0 && (
+                  <ul
+                    style={{
+                      paddingLeft: "20px",
+                      margin: 0,
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "8px",
+                    }}
+                  >
+                    {exp.points.map((point, j) => (
+                      <li
+                        key={j}
+                        style={{
+                          fontSize: "13px",
+                          color: "var(--ae-muted)",
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
