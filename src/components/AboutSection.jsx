@@ -102,45 +102,75 @@ export const AboutSection = () => {
             position: "relative",
             background: "var(--ae-card)",
             border: "1px solid var(--ae-border)",
-            padding: "24px 28px",
-            display: "flex",
-            alignItems: "center",
-            gap: "20px",
+            padding: "28px 24px",
           }}
         >
           <span className="ae-corner ae-tl" />
+          <span className="ae-corner ae-tr" />
+          <span className="ae-corner ae-bl" />
           <span className="ae-corner ae-br" />
 
-          <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
-            <GraduationCap size={20} />
-          </span>
-
-          <div>
-            <div
+          {/* Header row — matches discipline cards */}
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+            <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
+              <GraduationCap size={20} />
+            </span>
+            <h4
               style={{
-                fontSize: "10px",
                 fontWeight: 700,
-                letterSpacing: "0.2em",
+                fontSize: "14px",
+                letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "var(--ae-accent)",
-                marginBottom: "6px",
+                color: "var(--ae-text)",
+                margin: 0,
               }}
             >
               Education
+            </h4>
+          </div>
+
+          {/* Content — two-column: degree left, meta right */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "space-between",
+              gap: "24px",
+              flexWrap: "wrap",
+            }}
+          >
+            <div>
+              <p
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  color: "var(--ae-text)",
+                  margin: "0 0 4px",
+                }}
+              >
+                University of Illinois Urbana-Champaign
+              </p>
+              <p style={{ fontSize: "13px", color: "var(--ae-muted)", margin: 0 }}>
+                B.S. Aerospace Engineering · Minor in Computer Science
+              </p>
             </div>
-            <h3
-              style={{
-                fontSize: "15px",
-                fontWeight: 700,
-                color: "var(--ae-text)",
-                margin: "0 0 3px",
-              }}
-            >
-              University of Illinois Urbana-Champaign
-            </h3>
-            <p style={{ fontSize: "13px", color: "var(--ae-muted)", margin: 0 }}>
-              B.S. Aerospace Engineering · Minor Computer Science · May 2026
-            </p>
+
+            <div style={{ textAlign: "right", flexShrink: 0 }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  color: "var(--ae-accent)",
+                  margin: "0 0 2px",
+                }}
+              >
+                May 2026
+              </p>
+              <p style={{ fontSize: "12px", color: "var(--ae-muted)", margin: 0 }}>
+                Champaign, IL
+              </p>
+            </div>
           </div>
         </div>
       </div>
