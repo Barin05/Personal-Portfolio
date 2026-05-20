@@ -182,7 +182,7 @@ export const HeroSection = () => {
           {/* Open-to-roles indicator */}
           <div
             style={{
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
               gap: "8px",
               fontSize: "12px",
@@ -227,6 +227,7 @@ export const HeroSection = () => {
             width: "260px",
             height: "540px",
             flexShrink: 0,
+            background: "var(--ae-bg)",
           }}
           className="hidden md:block"
         >
@@ -308,7 +309,7 @@ export const HeroSection = () => {
               whiteSpace: "nowrap",
             }}
           >
-            {["3+ Internships", "5 Projects", "M2.0 Dash"].map((chip) => (
+            {["3+ Internships", "5+ Projects", "M2.0 Dash"].map((chip) => (
               <span
                 key={chip}
                 style={{
