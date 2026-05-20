@@ -1,110 +1,114 @@
-import { Briefcase, Code, Cog, PencilRuler } from "lucide-react";
+import { Briefcase, Code, PencilRuler } from "lucide-react";
 import resumePDF from "../assets/Riyad_Babayev_Resume.pdf";
 
-
-
 export const AboutSection = () => {
-    
-    return (
-        <section id="about" className="py-24 px-4 relative">
-            <div className="container mx-auto max-w-5xl"> 
-                <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-                    About <span className="text-primary">Me</span>
-                </h2>
+  return (
+    <section
+      id="about"
+      className="ae-grid-bg py-24 px-4 relative"
+      style={{ background: "var(--ae-bg2)" }}
+    >
+      <div className="container mx-auto max-w-5xl">
+        <div className="ae-eyebrow">Background</div>
+        <h2 className="ae-section-title" style={{ marginBottom: "48px" }}>
+          About <span style={{ color: "var(--ae-accent)" }}>Me</span>
+        </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    {/* Right side content of the About Me starts here */}
-                    <div className="space-y-6">
-
-                        <p className="text-muted-foreground">
-                            I’m an Aerospace Engineer with a passion for solving real-world problems through engineering, technology, and design.
-                            With hands-on experience across aerospace, oil and gas, and tech industries.
-                        </p>
-                        <p className="text-muted-foreground, font-bold">
-                            I believe working across different fields and teams leads to more creative and effective solutions.
-                        </p>
-                        <p className="text-muted-foreground">
-                            Whether I’m contributing to large-scale engineering projects or creating small-scale digital tools, I care about making work that’s functional, thoughtful, and impactful.{" "}
-                            <span className="underline">My goal is to keep learning, keep building, and keep connecting ideas across disciplines.</span>
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-                            <a href="#contact" className="cosmic-button">
-                                Contact Me
-                            </a>
-                            <a
-                                href={resumePDF}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-                                aria-label="Open Riyad Babayev Resume (PDF)"
-                            >
-                                View Resume
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Left side content of the About Me starts here */}
-                    <div className="grid drid-cols-1 gap-6"> 
-                        <div className="gradient-border p-6 card-hover">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-full bg-primary/10">
-                                    <PencilRuler className="h-6 w-6 text-primary" />
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="font-semibold text-lg"> Engineering </h4>
-                                    <p className="text-muted-foreground">
-                                        Experience in aerospace and energy industries, with core skills in aircraft inspection, 
-                                        drone systems, mechanical design, 3D printing, CAD, FEA, and stress analysis.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="gradient-border p-6 card-hover">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-full bg-primary/10">
-                                    <Briefcase className="h-6 w-6 text-primary" />
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="font-semibold text-lg"> Project Management</h4>
-                                    <p className="text-muted-foreground">
-                                        Leading engineering teams by managing documentation, tracking deliverables, and facilitating vendor and client communication.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="gradient-border p-6 card-hover">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 rounded-full bg-primary/10">
-                                    <Code className="h-6 w-6 text-primary" />
-                                </div>
-                                <div className="text-left">
-                                    <h4 className="font-semibold text-lg"> Tech</h4>
-                                    <p className="text-muted-foreground">
-                                        Automating tasks, building tools, and exploring new ideas that enhance productivity and innovation with Python, JavaScript, and C++.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <h2 className="text-3xl text-primary font-bold mb-4">Education</h2>
-                <div className="space-y-2">
-                    <div>
-                    <h3 className="text-xl font-semibold">
-                        University of Illinois Urbana-Champaign
-                    </h3>
-                    <p className="text-sm italic">
-                        B.S. in Aerospace Engineering, Minor in Computer Science
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                        Champaign, IL — May 2026
-                    </p>
-                    </div>
-                </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left: text */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <p style={{ color: "var(--ae-muted)", lineHeight: 1.8, fontSize: "15px" }}>
+              I'm an Aerospace Engineer with a passion for solving real-world problems through
+              engineering, technology, and design. With hands-on experience across aerospace,
+              oil and gas, and tech industries.
+            </p>
+            <p style={{ color: "var(--ae-text)", lineHeight: 1.8, fontSize: "15px", fontWeight: 500 }}>
+              I believe working across different fields and teams leads to more creative and
+              effective solutions.
+            </p>
+            <p style={{ color: "var(--ae-muted)", lineHeight: 1.8, fontSize: "15px" }}>
+              Whether I'm contributing to large-scale engineering projects or creating small-scale
+              digital tools, I care about making work that's functional, thoughtful, and impactful.{" "}
+              <span style={{ textDecoration: "underline", color: "var(--ae-text)" }}>
+                My goal is to keep learning, keep building, and keep connecting ideas across disciplines.
+              </span>
+            </p>
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", paddingTop: "8px" }}>
+              <a href="#contact" className="ae-btn-primary">Contact Me</a>
+              <a href={resumePDF} target="_blank" rel="noopener noreferrer" className="ae-btn-outline">
+                View Resume
+              </a>
             </div>
-        </section>
-    );
+          </div>
+
+          {/* Right: cards */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            {[
+              {
+                icon: <PencilRuler size={22} />,
+                title: "Engineering",
+                desc: "Experience in aerospace and energy industries, with core skills in aircraft inspection, drone systems, mechanical design, 3D printing, CAD, FEA, and stress analysis.",
+              },
+              {
+                icon: <Briefcase size={22} />,
+                title: "Project Management",
+                desc: "Leading engineering teams by managing documentation, tracking deliverables, and facilitating vendor and client communication.",
+              },
+              {
+                icon: <Code size={22} />,
+                title: "Tech",
+                desc: "Automating tasks, building tools, and exploring new ideas that enhance productivity and innovation with Python, JavaScript, and C++.",
+              },
+            ].map(({ icon, title, desc }) => (
+              <div
+                key={title}
+                style={{
+                  position: "relative",
+                  background: "var(--ae-card)",
+                  border: "1px solid var(--ae-border)",
+                  padding: "20px 24px",
+                  display: "flex",
+                  gap: "16px",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span className="ae-corner ae-tl" />
+                <span className="ae-corner ae-br" />
+                <div
+                  style={{
+                    padding: "10px",
+                    background: "rgba(108,140,255,0.1)",
+                    color: "var(--ae-accent)",
+                    flexShrink: 0,
+                  }}
+                >
+                  {icon}
+                </div>
+                <div style={{ textAlign: "left" }}>
+                  <h4 style={{ fontWeight: 700, fontSize: "15px", color: "var(--ae-text)", marginBottom: "6px" }}>
+                    {title}
+                  </h4>
+                  <p style={{ color: "var(--ae-muted)", fontSize: "13px", lineHeight: 1.7 }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Education */}
+        <div style={{ marginTop: "56px", borderTop: "1px solid var(--ae-border)", paddingTop: "40px" }}>
+          <div className="ae-eyebrow">Education</div>
+          <h3 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--ae-text)", marginBottom: "6px" }}>
+            University of Illinois Urbana-Champaign
+          </h3>
+          <p style={{ fontSize: "14px", fontStyle: "italic", color: "var(--ae-muted)" }}>
+            B.S. in Aerospace Engineering, Minor in Computer Science
+          </p>
+          <p style={{ fontSize: "13px", color: "var(--ae-muted)", marginTop: "4px" }}>
+            Champaign, IL — May 2026
+          </p>
+        </div>
+      </div>
+    </section>
+  );
 };
