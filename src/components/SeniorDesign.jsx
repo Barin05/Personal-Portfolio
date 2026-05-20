@@ -235,7 +235,7 @@ export default function SeniorDesign() {
   };
 
   return (
-    <div style={{ background: "var(--ae-bg)", color: "var(--ae-text)", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ background: "var(--ae-bg)", color: "var(--ae-text)", minHeight: "100vh", overflowX: "hidden", textAlign: "left" }}>
       <SmallNavbar />
 
       {/* ── HERO ──────────────────────────────────────────── */}
