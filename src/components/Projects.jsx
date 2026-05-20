@@ -1,116 +1,159 @@
-import { ArrowRight, Github } from "lucide-react";
-import skid from '../assets/skid.png';
-import website from '../assets/website.png';
-import drone from '../assets/drone.png';
-import kestrel from '../assets/skybetterrender.jpg';
+import kestrel from "../assets/skybetterrender.jpg";
+import drone from "../assets/drone.png";
+import spacecraft from "../assets/Spacecraft_photo.png";
+import skid from "../assets/skid.png";
+import fdrPdf from "../assets/2026_FDR_Monkey_s_Fist-1.pdf";
 
-
-const projects = [
+const gridProjects = [
   {
-    id: 0,
-    title: "Kestrel — Naval Strike Fighter",
-    description: "Propulsion lead & landing gear lead for a carrier-capable single-engine strike fighter senior design capstone.",
-    image: kestrel,
-    tags: ["GasTurb", "Python", "Aircraft Design"],
-    demoUrl: "/senior-design",
-    githubUrl: "#",
-  },
-  {
-    id: 1,
-    title: '24" Ethane Trap Skid',
-    description: 'A project focused on the design and 3D print of a 24" Ethane Trap Skid for a client.',
-    image: skid,
-    tags: ["AutoCAD", "Cura", "3D Printing"],
-    demoUrl: "/skid",
-    githubUrl: "#",
-  },
-  {
-    id: 2,
     title: "Racing Quadrotor Drone",
-    description: "Full-state control system for a racing quadrotor drone using control techniques.",
+    category: "Controls",
+    description:
+      "Full-state control system for a racing quadrotor drone using advanced control techniques.",
     image: drone,
     tags: ["Python", "MATLAB", "SymPy"],
-    demoUrl: "/drone",
-    githubUrl: "#",
+    href: "/drone",
   },
   {
-    id: 3,
-    title: "Portfolio Website",
-    description: "Full-feature personal portfolio website with custom-made star background and first web-design project.",
-    image: website,
-    tags: ["React", "Tailwind", "JavaScript"],
-    demoUrl: "#",
-    githubUrl: "#",
+    title: "Spacecraft Attitude Control",
+    category: "Aerospace",
+    description:
+      "Attitude determination and control simulation for a 3-axis stabilized spacecraft.",
+    image: spacecraft,
+    tags: ["Python", "MATLAB"],
+    href: "/spacecraft",
+  },
+  {
+    title: '24" Ethane Trap Skid',
+    category: "MechE",
+    description:
+      'Design and 3D print of a 24" Ethane Trap Skid for a process engineering client.',
+    image: skid,
+    tags: ["AutoCAD", "Cura", "3D Printing"],
+    href: "/skid",
   },
 ];
 
 export const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 px-4 relative">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          {" "}
-          Featured <span className="text-primary"> Projects </span>
-        </h2>
-
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Here are some of my recent projects. Each project was carefully
-          crafted with attention to detail, performance, and user experience.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.slice(0, 3).map((project, key) => (
-            <a
-              key={key}
-              href={project.demoUrl}
-              className="block group bg-card rounded-lg overflow-hidden shadow-xs card-hover"
-            >
-              <div className="h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-
-              <div className="p-6">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-1 text-xs font-medium border rounded-full bg-secondary text-secondary-foreground">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <h3 className="text-xl font-semibold mb-1">{project.title}</h3>
-                <p className="text-muted-foreground text-sm mb-4">
-                  {project.description}
-                </p>
-                <div className="flex justify-between items-center">
-                  <div className="flex space-x-3">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                      onClick={e => e.stopPropagation()}
-                    >
-                      <Github size={20} />
-                    </a>
-                  </div>
-                  <span className="text-xs opacity-70">Click for more info</span>
-                </div>
-              </div>
-            </a>
-          ))}
+    <section id="projects" style={{ background: "var(--ae-bg)" }}>
+      {/* ── Featured Kestrel Block ── */}
+      <div className="kestrel-block ae-grid-bg">
+        {/* Aircraft image fills right side */}
+        <div className="kestrel-img-wrap">
+          <img src={kestrel} alt="Kestrel aircraft render" className="kestrel-img" />
+          <div className="kestrel-img-fade" />
         </div>
 
-        <div className="text-center mt-12">
-          <a
-            className="cosmic-button w-fit flex items-center mx-auto gap-2"
-            href="/projects"
+        {/* Content */}
+        <div className="kestrel-content">
+          <span className="kestrel-badge">Featured Work — AE443 Capstone</span>
+
+          <h2 className="kestrel-title">Kestrel.</h2>
+
+          <p style={{ fontSize: "15px", color: "var(--ae-muted)", marginBottom: "16px" }}>
+            Naval carrier-capable single-engine strike fighter
+          </p>
+
+          <div className="kestrel-desc">
+            <span className="ae-corner ae-tl" style={{ width: "12px", height: "12px" }} />
+            <span className="ae-corner ae-br" style={{ width: "12px", height: "12px" }} />
+            Propulsion lead &amp; landing gear lead for a Mach 2.0-capable carrier strike
+            fighter designed for the US Navy. Responsible for engine cycle analysis
+            (GasTurb), inlet design (DSI), landing gear sizing, and integration trade
+            studies.
+          </div>
+
+          <div className="kestrel-specs">
+            {[
+              { value: "Mach 2.0", label: "Dash Speed" },
+              { value: "1,000 nm", label: "Combat Radius" },
+              { value: "62,449 lb", label: "MTOW" },
+              { value: "F100-PW-229", label: "Engine" },
+            ].map(({ value, label }) => (
+              <div key={label} className="kestrel-spec-item">
+                <span className="kestrel-spec-value">{value}</span>
+                <span className="kestrel-spec-label">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <a href="/senior-design" className="ae-btn-primary">
+              Explore Design →
+            </a>
+            <a
+              href={fdrPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ae-btn-outline"
+            >
+              View FDR
+            </a>
+          </div>
+        </div>
+
+        {/* Annotation callouts */}
+        <div className="kestrel-annotation" style={{ top: "32%", right: "28%" }}>
+          <span className="kestrel-annotation-dot" />
+          Dual DSI Inlets
+        </div>
+        <div className="kestrel-annotation" style={{ top: "62%", right: "22%" }}>
+          <span className="kestrel-annotation-dot" />
+          Tricycle LG
+        </div>
+      </div>
+
+      {/* ── Diamond Divider ── */}
+      <div
+        className="ae-diamond-divider"
+        style={{ background: "var(--ae-bg)", padding: "40px 0 28px" }}
+      >
+        <span className="ae-diamond" />
+      </div>
+
+      {/* ── Other Projects Grid ── */}
+      <div className="px-4 pb-20" style={{ background: "var(--ae-bg)" }}>
+        <div className="container mx-auto max-w-5xl">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "20px",
+              marginBottom: "40px",
+            }}
           >
-            View All Projects <ArrowRight size={16} />
-          </a>
+            {gridProjects.map((proj) => (
+              <a key={proj.title} href={proj.href} className="ae-project-card">
+                <span className="ae-corner ae-tl" />
+                <span className="ae-corner ae-br" />
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  className="ae-project-card-img"
+                />
+                <div className="ae-project-card-body">
+                  <span className="ae-project-tag">{proj.category}</span>
+                  <div className="ae-project-card-title">{proj.title}</div>
+                  <div className="ae-project-card-desc">{proj.description}</div>
+                  <div className="ae-project-chips">
+                    {proj.tags.map((t) => (
+                      <span key={t} className="ae-chip">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="ae-project-arrow">Explore →</div>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div style={{ textAlign: "center" }}>
+            <a href="/projects" className="ae-btn-outline">
+              View All Projects →
+            </a>
+          </div>
         </div>
       </div>
     </section>
