@@ -429,12 +429,8 @@ export default function SeniorDesign() {
       {/* ── PROPULSION ──────────────────────────────────── */}
       <AeSection id="propulsion" eyebrow="Propulsion System" title={<>Engine <span style={{ color: "var(--ae-accent)" }}>Design</span></>} bg="var(--ae-bg2)" grid={true}>
         <p style={{ color: "var(--ae-muted)", fontSize: "14px", lineHeight: 1.8, marginBottom: "32px", maxWidth: "720px" }}>
-          I modeled the engine cycle in GasTurb using the GE F110 as the design basis, targeting supersonic performance with a low bypass ratio of 0.70. The single-engine configuration required careful sizing to meet OEI climb requirements at launch. I achieved a +7% efficiency gain by reducing the bypass ratio, and sized the dual DSI inlets for Mach 2.0 at 30,000 ft using Fanno flow analysis.
+          Modeled the engine cycle in GasTurb using the GE F110 as the design basis, targeting supersonic performance with a bypass ratio of 0.70. Sized the thrust-to-weight matching via constraint diagram at dash Mach 2.0, a sustained 8°/s turn at FL200, and carrier approach stall speed. Redundancy for single-engine operation includes an EPU, dual electrical buses, split hydraulics, and ballistic firewalls.
         </p>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "14px", marginBottom: "36px" }}>
-          {PROPULSION_STEPS.map((s) => <StepCard key={s.title} {...s} />)}
-        </div>
 
         <h3 style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--ae-accent)", marginBottom: "16px" }}>
           Engine Specifications
@@ -446,11 +442,8 @@ export default function SeniorDesign() {
         <div style={{ borderTop: "1px solid var(--ae-border)", paddingTop: "40px" }}>
           <div className="ae-eyebrow" style={{ marginBottom: "16px" }}>Inlet Design</div>
           <p style={{ color: "var(--ae-muted)", fontSize: "14px", lineHeight: 1.8, marginBottom: "24px", maxWidth: "720px" }}>
-            Selected dual divertless supersonic inlets (DSI) — one per side feeding a single engine. Sized each for ~138 lbm/s at the Mach 2.0 design condition using normal shock relations, ISA atmosphere, and Fanno flow for duct pressure recovery.
+            Selected dual divertless supersonic inlets (DSI), one per side, sized for ~138 lbm/s each at the Mach 2.0 design condition. Used normal shock relations, ISA atmosphere, and Fanno flow analysis to set inlet geometry and estimate duct pressure recovery.
           </p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "14px", marginBottom: "28px" }}>
-            {INLET_STEPS.map((s) => <StepCard key={s.title} {...s} />)}
-          </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "12px" }}>
             {INLET_SPECS.map((r) => <SpecCard key={r.label} label={r.label} value={r.value} />)}
           </div>
@@ -460,12 +453,8 @@ export default function SeniorDesign() {
       {/* ── LANDING GEAR ────────────────────────────────── */}
       <AeSection id="landing-gear" eyebrow="Landing Gear" title={<>Gear <span style={{ color: "var(--ae-accent)" }}>Design</span></>} bg="var(--ae-bg)" grid={false}>
         <p style={{ color: "var(--ae-muted)", fontSize: "14px", lineHeight: 1.8, marginBottom: "32px", maxWidth: "720px" }}>
-          Sized the landing gear for carrier operations — 20 ft/s sink rate design condition versus the typical 10–12 ft/s for land-based aircraft. The tricycle configuration uses twin nose wheels to straddle the carrier catapult, with stroke computed via the Currey energy equation at 5g.
+          Sized the tricycle landing gear for carrier operations — a 20 ft/s sink rate design condition, roughly double the 10–12 ft/s used for land-based aircraft. Twin nose wheels straddle the carrier catapult (≥19 in diameter requirement). Stroke was computed via the Currey energy equation at 5g, and tires were selected from the Goodyear Aviation Databook 2022 based on load rating and carrier-specific constraints.
         </p>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "14px", marginBottom: "36px" }}>
-          {LG_STEPS.map((s) => <StepCard key={s.title} {...s} />)}
-        </div>
 
         <h3 style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--ae-accent)", marginBottom: "16px" }}>
           Landing Gear Specifications
