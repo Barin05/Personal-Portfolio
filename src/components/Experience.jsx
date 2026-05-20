@@ -6,8 +6,8 @@ export const Experience = () => {
   return (
     <section
       id="experience"
-      className="ae-grid-bg py-24 px-4 relative"
-      style={{ backgroundColor: "var(--ae-bg)" }}
+      className="py-24 px-4 relative"
+      style={{ background: "var(--ae-bg)" }}
     >
       <div className="container mx-auto max-w-5xl">
         <div className="ae-eyebrow">Career</div>
