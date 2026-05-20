@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { name: "About", href: "#about" },
-  { name: "Work", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "/#about" },
+  { name: "Work", href: "/#projects" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 export const Navbar = () => {
@@ -37,7 +37,7 @@ export const Navbar = () => {
       <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         {/* Logo */}
         <a
-          href="#hero"
+          href="/"
           style={{
             fontSize: "15px",
             fontWeight: 800,

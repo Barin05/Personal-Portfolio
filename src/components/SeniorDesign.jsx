@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SmallNavbar } from "./SmallNavbar";
+import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
 import fdrReport from "../assets/2026_FDR_Monkey_s_Fist-1.pdf";
@@ -236,7 +236,7 @@ export default function SeniorDesign() {
 
   return (
     <div style={{ background: "var(--ae-bg)", color: "var(--ae-text)", minHeight: "100vh", overflowX: "hidden", textAlign: "left" }}>
-      <SmallNavbar />
+      <Navbar />
 
       {/* ── HERO ──────────────────────────────────────────── */}
       <section
