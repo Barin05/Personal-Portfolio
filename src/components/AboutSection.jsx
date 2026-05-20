@@ -2,17 +2,17 @@ import { Briefcase, Code, PencilRuler, GraduationCap } from "lucide-react";
 
 const disciplines = [
   {
-    icon: <PencilRuler size={24} />,
+    icon: <PencilRuler size={20} />,
     title: "Engineering",
     desc: "Aerospace & energy industries — aircraft inspection, drone systems, mechanical design, 3D printing, CAD, FEA, and stress analysis.",
   },
   {
-    icon: <Briefcase size={24} />,
+    icon: <Briefcase size={20} />,
     title: "Project Management",
     desc: "Engineering team leadership — documentation, deliverable tracking, and vendor & client communication.",
   },
   {
-    icon: <Code size={24} />,
+    icon: <Code size={20} />,
     title: "Tech",
     desc: "Building tools and automating workflows with Python, JavaScript, and C++ across engineering and research contexts.",
   },
@@ -23,7 +23,7 @@ export const AboutSection = () => {
     <section
       id="about"
       className="ae-grid-bg py-24 px-4 relative"
-      style={{ background: "var(--ae-bg2)" }}
+      style={{ backgroundColor: "var(--ae-bg2)" }}
     >
       <div className="container mx-auto max-w-5xl">
         <div className="ae-eyebrow">Background</div>
@@ -31,13 +31,13 @@ export const AboutSection = () => {
           About <span style={{ color: "var(--ae-accent)" }}>Me</span>
         </h2>
 
-        {/* Discipline cards — full-width three-column */}
+        {/* Discipline cards */}
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
             gap: "20px",
-            marginBottom: "56px",
+            marginBottom: "24px",
           }}
         >
           {disciplines.map(({ icon, title, desc }) => (
@@ -47,10 +47,7 @@ export const AboutSection = () => {
                 position: "relative",
                 background: "var(--ae-card)",
                 border: "1px solid var(--ae-border)",
-                padding: "32px 28px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
+                padding: "28px 24px",
               }}
             >
               <span className="ae-corner ae-tl" />
@@ -58,50 +55,38 @@ export const AboutSection = () => {
               <span className="ae-corner ae-bl" />
               <span className="ae-corner ae-br" />
 
-              {/* Icon */}
+              {/* Icon + title row */}
               <div
                 style={{
-                  width: "48px",
-                  height: "48px",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  background: "rgba(108,140,255,0.1)",
-                  color: "var(--ae-accent)",
+                  gap: "12px",
+                  marginBottom: "16px",
                 }}
               >
-                {icon}
+                <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
+                  {icon}
+                </span>
+                <h4
+                  style={{
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "var(--ae-text)",
+                    margin: 0,
+                  }}
+                >
+                  {title}
+                </h4>
               </div>
-
-              {/* Title */}
-              <h4
-                style={{
-                  fontWeight: 800,
-                  fontSize: "1rem",
-                  letterSpacing: "-0.01em",
-                  color: "var(--ae-text)",
-                  margin: 0,
-                }}
-              >
-                {title}
-              </h4>
-
-              {/* Divider */}
-              <div
-                style={{
-                  width: "32px",
-                  height: "2px",
-                  background: "var(--ae-accent)",
-                  opacity: 0.6,
-                }}
-              />
 
               {/* Description */}
               <p
                 style={{
                   color: "var(--ae-muted)",
                   fontSize: "13px",
-                  lineHeight: 1.75,
+                  lineHeight: 1.8,
                   margin: 0,
                 }}
               >
@@ -117,47 +102,44 @@ export const AboutSection = () => {
             position: "relative",
             background: "var(--ae-card)",
             border: "1px solid var(--ae-border)",
-            padding: "28px 32px",
+            padding: "24px 28px",
             display: "flex",
-            alignItems: "flex-start",
+            alignItems: "center",
             gap: "20px",
           }}
         >
           <span className="ae-corner ae-tl" />
           <span className="ae-corner ae-br" />
 
-          <div
-            style={{
-              width: "48px",
-              height: "48px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "rgba(108,140,255,0.1)",
-              color: "var(--ae-accent)",
-              flexShrink: 0,
-            }}
-          >
-            <GraduationCap size={24} />
-          </div>
+          <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
+            <GraduationCap size={20} />
+          </span>
 
           <div>
-            <div className="ae-eyebrow" style={{ marginBottom: "8px" }}>Education</div>
+            <div
+              style={{
+                fontSize: "10px",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--ae-accent)",
+                marginBottom: "6px",
+              }}
+            >
+              Education
+            </div>
             <h3
               style={{
-                fontSize: "1.1rem",
+                fontSize: "15px",
                 fontWeight: 700,
                 color: "var(--ae-text)",
-                marginBottom: "4px",
+                margin: "0 0 3px",
               }}
             >
               University of Illinois Urbana-Champaign
             </h3>
-            <p style={{ fontSize: "14px", fontStyle: "italic", color: "var(--ae-muted)", margin: "0 0 4px" }}>
-              B.S. in Aerospace Engineering, Minor in Computer Science
-            </p>
-            <p style={{ fontSize: "12px", color: "var(--ae-muted)", margin: 0, letterSpacing: "0.05em" }}>
-              Champaign, IL — May 2026
+            <p style={{ fontSize: "13px", color: "var(--ae-muted)", margin: 0 }}>
+              B.S. Aerospace Engineering · Minor Computer Science · May 2026
             </p>
           </div>
         </div>
