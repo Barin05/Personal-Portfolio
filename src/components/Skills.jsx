@@ -46,7 +46,7 @@ export const SkillsSection = () => {
     <section
       id="skills"
       className="ae-grid-bg py-24 px-4 relative"
-      style={{ background: "var(--ae-bg2)" }}
+      style={{ backgroundColor: "var(--ae-bg2)" }}
     >
       <div className="container mx-auto max-w-5xl">
         <div className="ae-eyebrow">Expertise</div>
