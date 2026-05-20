@@ -1,15 +1,5 @@
-import {
-  Github,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Github, Instagram, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
-// If you use a toast hook (e.g., shadcn), import it here and replace alert() calls below.
 
 export const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -18,181 +8,276 @@ export const ContactSection = () => {
     e.preventDefault();
     if (isSubmitting) return;
     setIsSubmitting(true);
-
     try {
       const form = e.currentTarget;
       const data = new FormData(form);
-
-      // TODO: Replace with your Formspree form ID
-      const FORMSPREE_ENDPOINT = "https://formspree.io/f/xanbzgnv"; 
-
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch("https://formspree.io/f/xanbzgnv", {
         method: "POST",
         body: data,
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
-
       if (res.ok) {
-        // Clear the form
         form.reset();
-        // Replace alert with your toast util if available
         alert("Message sent! Thanks for reaching out. I'll get back to you soon.");
       } else {
-        alert("Something went wrong sending your message. Please try again or email me directly.");
+        alert("Something went wrong. Please try again or email me directly.");
       }
-    } catch (err) {
+    } catch {
       alert("Network error. Please try again later or email me directly.");
     } finally {
       setIsSubmitting(false);
     }
   };
-  return (
-    <section id="contact" className="py-24 px-4 relative bg-secondary/30">
-      <div className="container mx-auto max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          Get In <span className="text-primary"> Touch</span>
-        </h2>
 
-        <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+  return (
+    <section
+      id="contact"
+      className="ae-grid-bg py-24 px-4 relative"
+      style={{ background: "var(--ae-bg2)" }}
+    >
+      <div className="container mx-auto max-w-5xl">
+        <div className="ae-eyebrow">Get In Touch</div>
+        <h2 className="ae-section-title" style={{ marginBottom: "16px" }}>
+          Contact <span style={{ color: "var(--ae-accent)" }}>Me</span>
+        </h2>
+        <p style={{ color: "var(--ae-muted)", marginBottom: "48px", maxWidth: "520px" }}>
           Have a project in mind or want to collaborate? Feel free to reach out.
           I'm always open to discussing new opportunities.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              {" "}
+          {/* Left: contact info */}
+          <div>
+            <h3
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: 700,
+                color: "var(--ae-text)",
+                marginBottom: "28px",
+              }}
+            >
               Contact Information
             </h3>
-
-            <div className="space-y-6 justify-center">
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Email</h4>
-                  <a
-                    href="mailto:riyad.babayev05@gmail.com"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {[
+                {
+                  icon: <Mail size={20} />,
+                  label: "Email",
+                  value: "riyad.babayev05@gmail.com",
+                  href: "mailto:riyad.babayev05@gmail.com",
+                },
+                {
+                  icon: <Phone size={20} />,
+                  label: "Phone",
+                  value: "+1 (217) 729-1691",
+                  href: "tel:+12177291691",
+                },
+                {
+                  icon: <MapPin size={20} />,
+                  label: "Location",
+                  value: "Champaign, Illinois, USA",
+                  href: null,
+                },
+              ].map(({ icon, label, value, href }) => (
+                <div key={label} style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
+                  <div
+                    style={{
+                      padding: "10px",
+                      background: "rgba(108,140,255,0.1)",
+                      color: "var(--ae-accent)",
+                      flexShrink: 0,
+                    }}
                   >
-                    riyad.babayev05@gmail.com
-                  </a>
+                    {icon}
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontWeight: 600,
+                        fontSize: "13px",
+                        color: "var(--ae-text)",
+                        marginBottom: "2px",
+                      }}
+                    >
+                      {label}
+                    </div>
+                    {href ? (
+                      <a
+                        href={href}
+                        style={{ fontSize: "13px", color: "var(--ae-muted)", textDecoration: "none" }}
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <span style={{ fontSize: "13px", color: "var(--ae-muted)" }}>{value}</span>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Phone</h4>
-                  <a
-                    href="tel:+12177291691"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    +1 (217) 729-1691
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <div className="p-3 rounded-full bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />{" "}
-                </div>
-                <div>
-                  <h4 className="font-medium"> Location</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Champaign, Illinois, USA
-                  </a>
-                </div>
-              </div>
+              ))}
             </div>
 
-            <div className="pt-8">
-              <h4 className="font-medium mb-4"> Connect With Me</h4>
-              <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/riyad-babayev-0b7986226/" target="_blank">
-                  <Linkedin />
-                </a>
-                <a href="https://www.instagram.com/ba.ri___n?igsh=MXBueG54YmU3dmdkeA%3D%3D&utm_source=qr" target="_blank">
-                  <Instagram />
-                </a>
-                <a href="https://github.com/Barin05" target="_blank">
-                  <Github />
-                </a>
+            <div style={{ marginTop: "40px" }}>
+              <div
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "var(--ae-muted)",
+                  marginBottom: "16px",
+                }}
+              >
+                Connect
+              </div>
+              <div style={{ display: "flex", gap: "12px" }}>
+                {[
+                  {
+                    href: "https://www.linkedin.com/in/riyad-babayev-0b7986226/",
+                    icon: <Linkedin size={18} />,
+                  },
+                  { href: "https://github.com/Barin05", icon: <Github size={18} /> },
+                  {
+                    href: "https://www.instagram.com/ba.ri___n?igsh=MXBueG54YmU3dmdkeA%3D%3D&utm_source=qr",
+                    icon: <Instagram size={18} />,
+                  },
+                ].map(({ href, icon }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "40px",
+                      height: "40px",
+                      border: "1px solid var(--ae-border)",
+                      color: "var(--ae-muted)",
+                      textDecoration: "none",
+                      transition: "color 0.2s, border-color 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "var(--ae-accent)";
+                      e.currentTarget.style.borderColor = "var(--ae-accent)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "var(--ae-muted)";
+                      e.currentTarget.style.borderColor = "var(--ae-border)";
+                    }}
+                  >
+                    {icon}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
 
+          {/* Right: form */}
           <div
-            className="bg-card p-8 rounded-lg shadow-xs"
+            style={{
+              position: "relative",
+              background: "var(--ae-card)",
+              border: "1px solid var(--ae-border)",
+              padding: "32px",
+            }}
           >
-            <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
-
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                  placeholder="Riyad Babayev..."
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
-                  {" "}
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                  placeholder="goat@gmail.com"
-                />
-              </div>
-
+            <span className="ae-corner ae-tl" />
+            <span className="ae-corner ae-br" />
+            <h3
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: 700,
+                color: "var(--ae-text)",
+                marginBottom: "24px",
+              }}
+            >
+              Send a Message
+            </h3>
+            <form
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+              onSubmit={handleSubmit}
+            >
+              {[
+                { id: "name", label: "Your Name", type: "text", placeholder: "Riyad Babayev..." },
+                { id: "email", label: "Your Email", type: "email", placeholder: "your@email.com" },
+              ].map(({ id, label, type, placeholder }) => (
+                <div key={id}>
+                  <label
+                    htmlFor={id}
+                    style={{
+                      display: "block",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      color: "var(--ae-muted)",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    {label}
+                  </label>
+                  <input
+                    type={type}
+                    id={id}
+                    name={id}
+                    required
+                    placeholder={placeholder}
+                    style={{
+                      width: "100%",
+                      padding: "10px 14px",
+                      background: "rgba(8,11,18,0.6)",
+                      border: "1px solid var(--ae-border)",
+                      color: "var(--ae-text)",
+                      fontSize: "14px",
+                      outline: "none",
+                      boxSizing: "border-box",
+                    }}
+                  />
+                </div>
+              ))}
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-sm font-medium mb-2"
+                  style={{
+                    display: "block",
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    color: "var(--ae-muted)",
+                    marginBottom: "8px",
+                  }}
                 >
-                  {" "}
                   Your Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
+                  rows={5}
                   placeholder="Hello, I'd like to talk about..."
+                  style={{
+                    width: "100%",
+                    padding: "10px 14px",
+                    background: "rgba(8,11,18,0.6)",
+                    border: "1px solid var(--ae-border)",
+                    color: "var(--ae-text)",
+                    fontSize: "14px",
+                    outline: "none",
+                    resize: "none",
+                    boxSizing: "border-box",
+                  }}
                 />
               </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={cn(
-                  "cosmic-button w-full flex items-center justify-center gap-2"
-                )}
+                className="ae-btn-primary"
+                style={{ width: "100%", justifyContent: "center" }}
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
-                <Send size={16} />
+                <Send size={15} />
               </button>
             </form>
           </div>
