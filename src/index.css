@@ -617,6 +617,28 @@
     padding-top: 100px !important;
   }
 
+  /* Kestrel featured block — mobile layout */
+  .kestrel-content { padding: 36px 20px 40px; }
+  .kestrel-img-fade {
+    background: linear-gradient(
+      90deg,
+      var(--ae-bg2) 60%,
+      rgba(13, 18, 32, 0.88) 82%,
+      transparent 100%
+    );
+  }
+  .kestrel-annotation { display: none; } /* hide callouts — overlap on narrow screens */
+  .kestrel-desc { font-size: 13px; padding: 12px 16px; }
+  .kestrel-specs { gap: 10px; margin: 16px 0; }
+  .kestrel-title { font-size: clamp(2.2rem, 10vw, 3.5rem); margin: 8px 0 10px; }
+
+  /* Education card — stack vertically on mobile */
+  .ae-edu-row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  .ae-edu-meta { text-align: left !important; }
+
   /* Hero image fade — cover more of the screen so text stays readable */
   .ae-hero-img-fade {
     background: linear-gradient(
@@ -653,5 +675,17 @@
   .ae-project-hero-content {
     padding-top: 100px !important;
     padding-bottom: 60px !important;
+  }
+
+  /* Experience cards — compact on mobile */
+  .ae-exp-card { padding: 18px 16px !important; }
+  .ae-exp-header {
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin-bottom: 14px !important;
+  }
+  .ae-exp-date {
+    padding-top: 0 !important;
+    font-size: 10px !important;
   }
 }

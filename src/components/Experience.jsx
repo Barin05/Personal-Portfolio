@@ -19,6 +19,7 @@ export const Experience = () => {
           {experiences.map((exp, i) => (
             <div
               key={i}
+              className="ae-exp-card"
               style={{
                 position: "relative",
                 background: "var(--ae-card)",
@@ -33,6 +34,7 @@ export const Experience = () => {
 
               {/* Header: logo + role + company + date */}
               <div
+                className="ae-exp-header"
                 style={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -93,14 +95,15 @@ export const Experience = () => {
 
                 {/* Right: date */}
                 <span
+                  className="ae-exp-date"
                   style={{
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "0.08em",
                     textTransform: "uppercase",
                     color: "var(--ae-muted)",
-                    whiteSpace: "nowrap",
                     paddingTop: "2px",
+                    flexShrink: 0,
                   }}
                 >
                   {exp.date}

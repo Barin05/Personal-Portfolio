@@ -102,7 +102,7 @@ export const AboutSection = () => {
             position: "relative",
             background: "var(--ae-card)",
             border: "1px solid var(--ae-border)",
-            padding: "28px 24px",
+            padding: "14px 18px",
           }}
         >
           <span className="ae-corner ae-tl" />
@@ -110,64 +110,43 @@ export const AboutSection = () => {
           <span className="ae-corner ae-bl" />
           <span className="ae-corner ae-br" />
 
-          {/* Header row — matches discipline cards */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-            <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
-              <GraduationCap size={20} />
-            </span>
-            <h4
-              style={{
-                fontWeight: 700,
-                fontSize: "14px",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--ae-text)",
-                margin: 0,
-              }}
-            >
-              Education
-            </h4>
-          </div>
-
-          {/* Content — two-column: degree left, meta right */}
+          {/* Single compact row: icon + degree info + date */}
           <div
+            className="ae-edu-row"
             style={{
               display: "flex",
-              alignItems: "flex-start",
+              alignItems: "center",
               justifyContent: "space-between",
-              gap: "24px",
+              gap: "16px",
               flexWrap: "wrap",
             }}
           >
-            <div>
-              <p
-                style={{
-                  fontSize: "15px",
-                  fontWeight: 700,
-                  color: "var(--ae-text)",
-                  margin: "0 0 4px",
-                }}
-              >
-                University of Illinois Urbana-Champaign
-              </p>
-              <p style={{ fontSize: "13px", color: "var(--ae-muted)", margin: 0 }}>
-                B.S. Aerospace Engineering · Minor in Computer Science
-              </p>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+              <span style={{ color: "var(--ae-accent)", display: "flex", flexShrink: 0 }}>
+                <GraduationCap size={16} />
+              </span>
+              <div>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    fontWeight: 700,
+                    color: "var(--ae-text)",
+                    margin: "0 0 2px",
+                  }}
+                >
+                  University of Illinois Urbana-Champaign
+                </p>
+                <p style={{ fontSize: "12px", color: "var(--ae-muted)", margin: 0 }}>
+                  B.S. Aerospace Engineering · Minor in CS
+                </p>
+              </div>
             </div>
 
-            <div style={{ textAlign: "right", flexShrink: 0 }}>
-              <p
-                style={{
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  color: "var(--ae-accent)",
-                  margin: "0 0 2px",
-                }}
-              >
+            <div className="ae-edu-meta" style={{ textAlign: "right", flexShrink: 0 }}>
+              <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "var(--ae-accent)", margin: "0 0 1px" }}>
                 May 2026
               </p>
-              <p style={{ fontSize: "12px", color: "var(--ae-muted)", margin: 0 }}>
+              <p style={{ fontSize: "11px", color: "var(--ae-muted)", margin: 0 }}>
                 Champaign, IL
               </p>
             </div>

@@ -142,6 +142,36 @@ export const HeroSection = () => {
         }}
       />
 
+      {/* Small avatar — mobile only */}
+      <div
+        className="md:hidden"
+        style={{
+          position: "absolute",
+          top: "80px",
+          right: "20px",
+          zIndex: 20,
+          width: "130px",
+          height: "210px",
+          borderRadius: "16px",
+          overflow: "hidden",
+          border: "2px solid var(--ae-accent)",
+          boxShadow: "0 0 18px rgba(108,140,255,0.35)",
+          background: "var(--ae-bg)",
+          flexShrink: 0,
+        }}
+      >
+        <img
+          src={headshot}
+          alt="Riyad Babayev"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+            objectPosition: "center top",
+          }}
+        />
+      </div>
+
       {/* Two-column layout */}
       <div
         className="container ae-hero-grid"
