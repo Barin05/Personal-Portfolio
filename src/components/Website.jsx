@@ -1,237 +1,396 @@
-import React, { useState } from "react";
-import { StarBackground } from "./StarBackground";
-import { ThemeToggle } from "./ThemeToggle";
-import { SmallNavbar } from "./SmallNavbar";
+import { useState } from "react";
 import website from "../assets/website.png";
 import { Footer } from "./Footer";
-// ⬇️ Optional screenshots (uncomment & add real files to enable the gallery)
-// import heroShot from "../assets/website_hero.png";
-// import darkMode from "../assets/website_dark.png";
-// import timeline from "../assets/website_timeline.png";
-// import filters from "../assets/website_filters.png";
+import { Navbar } from "./Navbar";
 
-// --- Personal Portfolio Website — Page (same layout as your other project pages) ---
+/* ── Data ─────────────────────────────────────────────── */
 
-const SPEC_ROWS = [
-  { label: "Frontend", value: "React, Vite, Tailwind CSS" },
-  { label: "Routing", value: "react-router-dom (client-side)" },
-  { label: "State", value: "React hooks" },
-  { label: "Theming", value: "Dark/Light mode with ThemeToggle" },
-  { label: "Deployment", value: "Hostinger + GitHub (CI/CD)" },
-  { label: "Extras", value: "Animated backgrounds, project filters, responsive layout" },
+const SPECS = [
+  { label: "Frontend", value: "React 19 + Vite 7" },
+  { label: "Styling", value: "Tailwind CSS v4 + custom CSS tokens" },
+  { label: "Routing", value: "react-router-dom (client-side SPA)" },
+  { label: "State", value: "React hooks (useState, useEffect, useRef)" },
+  { label: "Deployment", value: "Hostinger + GitHub (CI/CD pipeline)" },
+  { label: "Design", value: "Aerospace-themed dark UI with grid, bracket corners, accent colors" },
 ];
 
 const ARTIFACTS = [
-  { item: "Source code (React + Tailwind)", qty: "1 repo", note: "Component-based UI with utility classes" },
-  { item: "Build config (Vite)", qty: "1", note: "Fast dev server + optimized build" },
-  { item: "Routing setup", qty: "1", note: "Project pages (Skid, Drone, Spacecraft, Maze)" },
-  { item: "Deployment files", qty: "2", note: "Hostinger settings + GitHub workflow" },
+  { item: "Component library", note: "Navbar · Hero · About · Experience · Skills · Projects · Contact · Footer" },
+  { item: "Project detail pages", note: "Kestrel · Drone · Spacecraft · Skid · Maze · Website" },
+  { item: "CSS design system", note: "Custom tokens, ae-grid-bg, ae-corner, ae-eyebrow, ae-btn-* utilities" },
+  { item: "FloatingCTA", note: "Fixed right-edge Resume + Hire Me tabs with pulse indicator" },
+  { item: "Star canvas", note: "requestAnimationFrame star field rendered via useRef + useEffect" },
+  { item: "Routing & deployment", note: "react-router-dom SPA config + Hostinger hosting" },
 ];
 
-// Optional gallery: keep empty to hide the section; add as needed.
-const GALLERY = [
-  { src: website, alt: "Homepage hero" },
-  // { src: darkMode, alt: "Dark mode UI" },
-  // { src: timeline, alt: "Animated timeline" },
-  // { src: filters, alt: "Project filter chips" },
+const TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "specs", label: "Specs" },
+  { id: "artifacts", label: "Artifacts" },
 ];
+
+/* ── Shared sub-components ─────────────────────────────── */
+
+const SpecCard = ({ label, value }) => (
+  <div
+    style={{
+      position: "relative",
+      background: "var(--ae-card)",
+      border: "1px solid var(--ae-border)",
+      padding: "14px 16px",
+    }}
+  >
+    <span className="ae-corner ae-tl" style={{ width: "10px", height: "10px" }} />
+    <span className="ae-corner ae-br" style={{ width: "10px", height: "10px" }} />
+    <div
+      style={{
+        fontSize: "10px",
+        fontWeight: 700,
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        color: "var(--ae-muted)",
+        marginBottom: "6px",
+      }}
+    >
+      {label}
+    </div>
+    <div style={{ fontSize: "14px", fontWeight: 700, color: "var(--ae-text)" }}>
+      {value}
+    </div>
+  </div>
+);
+
+const AeSection = ({ id, eyebrow, title, bg = "var(--ae-bg)", grid = false, children }) => (
+  <section
+    id={id}
+    className={grid ? "ae-grid-bg" : ""}
+    style={{ backgroundColor: bg, padding: "72px 16px" }}
+  >
+    <div className="container mx-auto max-w-5xl">
+      <div className="ae-eyebrow">{eyebrow}</div>
+      <h2 className="ae-section-title" style={{ marginBottom: "40px" }}>
+        {title}
+      </h2>
+      {children}
+    </div>
+  </section>
+);
+
+/* ── Main component ────────────────────────────────────── */
 
 export default function Website() {
-  const [lightboxIndex, setLightboxIndex] = useState(null);
-  const open = (idx) => setLightboxIndex(idx);
-  const close = () => setLightboxIndex(null);
-  const prev = (e) => { e?.stopPropagation(); setLightboxIndex((i) => (i === null ? null : (i - 1 + GALLERY.length) % GALLERY.length)); };
-  const next = (e) => { e?.stopPropagation(); setLightboxIndex((i) => (i === null ? null : (i + 1) % GALLERY.length)); };
-
   return (
-    <main className="min-h-dvh bg-background text-foreground overflow-x-hidden">
-      <SmallNavbar />
-      <ThemeToggle />
-      <StarBackground />
+    <div
+      style={{
+        background: "var(--ae-bg)",
+        color: "var(--ae-text)",
+        minHeight: "100vh",
+        overflowX: "hidden",
+        textAlign: "left",
+      }}
+    >
+      <Navbar />
 
-      {/* HERO */}
-      <section className="relative">
-        <div className="container py-12 md:py-16">
-          <div className="grid gap-8 md:grid-cols-2 items-center">
-            <div>
-              <p className="uppercase tracking-widest text-sm opacity-70">Project</p>
-              <h1 className="mt-1 text-3xl md:text-4xl font-bold">Personal Portfolio Website</h1>
-              <p className="mt-3 opacity-80">
-                Responsive portfolio built with React + Tailwind + Vite. Includes dark/light theming,
-                animated backgrounds, project filters, and consistent project pages with sticky tabs,
-                galleries, and CTAs.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {["React","Tailwind","Routing","CI/CD"].map((t) => (
-                  <span key={t} className="inline-flex items-center rounded-full border px-3 py-1 text-xs">{t}</span>
-                ))}
-              </div>
-              <div className="mt-6 flex flex-wrap gap-4 text-sm">
-                <Meta k="Timeline" v="3 weeks" />
-                <Meta k="Role" v="Design · Frontend · Deployment" />
-                <Meta k="Tools" v="React • Vite • Tailwind • Hostinger • GitHub" />
-              </div>
-            </div>
-            <div>
-              {GALLERY.length > 0 ? (
-                <>
-                  <button onClick={() => open(0)} className="w-full aspect-video overflow-hidden rounded-xl border bg-card card-hover">
-                    {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element */}
-                    <img src={GALLERY[0].src} alt={GALLERY[0].alt} className="w-full h-full object-cover" />
-                  </button>
-                  <p className="mt-2 text-center text-xs opacity-70">Click to open gallery</p>
-                </>
-              ) : (
-                <div className="w-full aspect-video rounded-xl border bg-card grid place-items-center">
-                  <span className="text-xs opacity-60">Add website screenshots to enable the gallery preview</span>
+      {/* ── HERO ──────────────────────────────────────────── */}
+      <section
+        className="ae-grid-bg"
+        style={{
+          position: "relative",
+          minHeight: "85vh",
+          backgroundColor: "var(--ae-bg2)",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ position: "absolute", inset: 0 }}>
+          <img
+            src={website}
+            alt="Portfolio website screenshot"
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              height: "100%",
+              width: "60%",
+              objectFit: "cover",
+              objectPosition: "top center",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(90deg, var(--ae-bg2) 35%, rgba(13,18,32,0.7) 65%, transparent 100%)",
+            }}
+          />
+        </div>
+
+        <div
+          className="container mx-auto max-w-5xl"
+          style={{ position: "relative", zIndex: 10, padding: "120px 16px 80px" }}
+        >
+          <div className="ae-eyebrow">React · Tailwind · Full-Stack · 2025</div>
+
+          <h1
+            style={{
+              fontSize: "clamp(2.8rem, 8vw, 5.5rem)",
+              fontWeight: 900,
+              letterSpacing: "-0.03em",
+              lineHeight: 1,
+              color: "var(--ae-text)",
+              marginBottom: "12px",
+            }}
+          >
+            Portfolio Website.
+          </h1>
+
+          <p
+            style={{
+              fontSize: "16px",
+              color: "var(--ae-muted)",
+              marginBottom: "28px",
+              maxWidth: "480px",
+            }}
+          >
+            Aerospace-themed personal portfolio built with React + Vite + Tailwind CSS v4. Custom design system, star canvas, and fully responsive project pages.
+          </p>
+
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "32px" }}>
+            {["React", "Tailwind CSS", "Vite", "JavaScript", "CI/CD"].map((t) => (
+              <span
+                key={t}
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "var(--ae-accent)",
+                  border: "1px solid var(--ae-border)",
+                  padding: "4px 12px",
+                  background: "rgba(108,140,255,0.07)",
+                }}
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: "32px",
+              flexWrap: "wrap",
+              marginBottom: "36px",
+              fontSize: "12px",
+            }}
+          >
+            {[
+              { k: "Timeline", v: "3 weeks" },
+              { k: "Role", v: "Design · Frontend · Deployment" },
+              { k: "Tools", v: "React · Vite · Tailwind · Hostinger" },
+            ].map(({ k, v }) => (
+              <div key={k}>
+                <div
+                  style={{
+                    color: "var(--ae-muted)",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    marginBottom: "3px",
+                  }}
+                >
+                  {k}
                 </div>
-              )}
-            </div>
+                <div style={{ color: "var(--ae-text)", fontWeight: 600 }}>{v}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <a href="#overview" className="ae-btn-primary">
+              Explore Project →
+            </a>
+            <a href="/#contact" className="ae-btn-outline">
+              Get in Touch
+            </a>
           </div>
         </div>
       </section>
 
-      {/* STICKY TABS */}
-      <div className="sticky top-0 z-20 border-y bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container py-3 text-sm">
-          <nav className="flex flex-wrap gap-4">
-            {[
-              ["overview","Overview"],
-              ["gallery","Gallery"],
-              ["build","Build Process"],
-              ["specs","Specs"],
-              ["artifacts","Artifacts"],
-              ["faq","FAQ"],
-            ].map(([id,label]) => (
-              <a key={id} href={`#${id}`} className="opacity-80 hover:opacity-100">{label}</a>
+      {/* ── STICKY TAB NAV ──────────────────────────────── */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 30,
+          background: "var(--ae-nav-bg)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid var(--ae-border)",
+        }}
+      >
+        <div className="container mx-auto max-w-5xl" style={{ padding: "0 16px" }}>
+          <nav style={{ display: "flex", gap: "0", overflowX: "auto" }}>
+            {TABS.map(({ id, label }) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                style={{
+                  display: "block",
+                  padding: "14px 20px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
+                  color: "var(--ae-muted)",
+                  textDecoration: "none",
+                  whiteSpace: "nowrap",
+                  borderBottom: "2px solid transparent",
+                  transition: "color 0.2s, border-color 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "var(--ae-accent)";
+                  e.currentTarget.style.borderBottomColor = "var(--ae-accent)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "var(--ae-muted)";
+                  e.currentTarget.style.borderBottomColor = "transparent";
+                }}
+              >
+                {label}
+              </a>
             ))}
           </nav>
         </div>
       </div>
 
-      <Section id="overview" title="Overview">
-        <p>
-          I designed and shipped a clean, fast portfolio focused on consistency and reuse. Shared components
-          (Navbar, ThemeToggle, StarBackground, Section helpers) keep pages uniform. Project pages follow the
-          same UX: hero, sticky tabs, overview, build, specs, artifacts, FAQ, and a CTA.
+      {/* ── OVERVIEW ────────────────────────────────────── */}
+      <AeSection
+        id="overview"
+        eyebrow="Project"
+        title={<>Project <span style={{ color: "var(--ae-accent)" }}>Overview</span></>}
+        bg="var(--ae-bg)"
+        grid={false}
+      >
+        <p style={{ color: "var(--ae-muted)", fontSize: "14px", lineHeight: 1.8, maxWidth: "720px" }}>
+          Designed and built a fully responsive aerospace-themed personal portfolio from scratch — my first web project. Built on React 19 + Vite 7 + Tailwind CSS v4 with a custom design system of CSS tokens, grid backgrounds, bracket corner decorations, and accent utilities. Includes an animated star canvas, a floating Resume/Hire Me CTA, and six individual project detail pages with consistent hero, tab nav, specs, and artifact layouts. Deployed via Hostinger with a GitHub CI/CD pipeline.
         </p>
-        <ul className="mt-4 list-disc list-inside opacity-80 text-sm">
-          <li>Reusable layout and tokens for a consistent look</li>
-          <li>Dark/light theme and responsive components</li>
-          <li>Fast dev/build times with Vite</li>
-          <li>Deployed via Hostinger + GitHub CI/CD</li>
-        </ul>
-      </Section>
+      </AeSection>
 
-      <Section id="build" title="Build Process (Step‑by‑Step)">
-        <ol className="grid gap-3">
-          {[
-            ["Design &amp; Layout","Sketched layout, sections, and navigation; built with reusable components."],
-            ["Implementation","React components with Tailwind utilities; accessibility and responsive tweaks."],
-            ["Dynamic Features","Dark/Light theme, animated background, project filters, sticky tabs."],
-            ["Deployment","Hostinger + GitHub; automatic builds from main branch."],
-          ].map(([t,body]) => (
-            <li key={t} className="rounded-xl border bg-card p-4">
-              <div className="font-medium">{t}</div>
-              <div className="mt-1 text-sm opacity-80" dangerouslySetInnerHTML={{__html: body}} />
-            </li>
+      {/* ── SPECS ───────────────────────────────────────── */}
+      <AeSection
+        id="specs"
+        eyebrow="System Data"
+        title={<>Technical <span style={{ color: "var(--ae-accent)" }}>Specifications</span></>}
+        bg="var(--ae-bg2)"
+        grid={true}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "12px",
+          }}
+        >
+          {SPECS.map((r) => (
+            <SpecCard key={r.label} label={r.label} value={r.value} />
           ))}
-        </ol>
-      </Section>
-
-      <Section id="specs" title="Technical Specs">
-        <dl className="grid gap-3 grid-cols-1 sm:grid-cols-2">
-          {SPEC_ROWS.map((row) => (
-            <div key={row.label} className="rounded-xl border bg-card p-4">
-              <dt className="text-[11px] uppercase tracking-wider opacity-70">{row.label}</dt>
-              <dd className="mt-1 font-medium">{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-
-      <Section id="artifacts" title="Artifacts (Files)">
-        <div className="overflow-x-auto">
-          <table className="w-full border-separate border-spacing-y-2">
-            <thead>
-              <tr className="text-left text-sm opacity-70">
-                <th className="rounded-l-xl bg-card px-3 py-2">Item</th>
-                <th className="bg-card px-3 py-2">Qty</th>
-                <th className="rounded-r-xl bg-card px-3 py-2">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ARTIFACTS.map((r, idx) => (
-                <tr key={idx}>
-                  <td className="rounded-l-xl bg-card px-3 py-2 font-medium" dangerouslySetInnerHTML={{__html: r.item}} />
-                  <td className="bg-card px-3 py-2">{r.qty}</td>
-                  <td className="rounded-r-xl bg-card px-3 py-2 opacity-80" dangerouslySetInnerHTML={{__html: r.note}} />
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
-      </Section>
+      </AeSection>
 
-      <Section id="faq" title="FAQ">
-        <div className="grid gap-3">
-          {[
-            ["Why build your own portfolio?","To present projects interactively and control the UX/brand beyond a static PDF."],
-            ["Why React + Tailwind?","Modular components and rapid styling with consistent tokens."],
-            ["What was tricky?","Balancing animations with performance and keeping pages consistent."],
-          ].map(([q,a]) => (
-            <div key={q} className="rounded-xl border bg-card p-4">
-              <div className="font-medium">{q}</div>
-              <div className="mt-1 text-sm opacity-80">{a}</div>
+      {/* ── ARTIFACTS ───────────────────────────────────── */}
+      <AeSection
+        id="artifacts"
+        eyebrow="Deliverables"
+        title={<>Work <span style={{ color: "var(--ae-accent)" }}>Artifacts</span></>}
+        bg="var(--ae-bg)"
+        grid={false}
+      >
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          {ARTIFACTS.map((r, i) => (
+            <div
+              key={i}
+              style={{
+                position: "relative",
+                background: "var(--ae-card)",
+                border: "1px solid var(--ae-border)",
+                padding: "16px 20px",
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
+                gap: "24px",
+                flexWrap: "wrap",
+              }}
+            >
+              <span className="ae-corner ae-tl" style={{ width: "10px", height: "10px" }} />
+              <span className="ae-corner ae-br" style={{ width: "10px", height: "10px" }} />
+              <span style={{ fontSize: "13px", fontWeight: 700, color: "var(--ae-text)" }}>
+                {r.item}
+              </span>
+              <span style={{ fontSize: "12px", color: "var(--ae-muted)", textAlign: "right" }}>
+                {r.note}
+              </span>
             </div>
           ))}
         </div>
-      </Section>
+      </AeSection>
 
-      {/* LIGHTBOX */}
-      {GALLERY.length > 0 && lightboxIndex !== null && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={close}>
-          <button
-            className="absolute left-4 top-4 rounded-full border bg-background/80 px-3 py-1 text-sm backdrop-blur"
-            onClick={(e) => { e.stopPropagation(); close(); }}
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <section style={{ backgroundColor: "var(--ae-bg2)", padding: "64px 16px" }}>
+        <div className="container mx-auto max-w-5xl">
+          <div
+            style={{
+              position: "relative",
+              background: "var(--ae-card)",
+              border: "1px solid var(--ae-border)",
+              padding: "48px 40px",
+              textAlign: "center",
+            }}
           >
-            Close
-          </button>
-          <button className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border bg-background/80 p-2" onClick={prev}>◀</button>
-          <div className="max-h-[85vh] max-w-[95vw] w-auto overflow-hidden rounded-2xl border bg-card p-2 md:p-4">
-            {/* eslint-disable-next-line jsx-a11y/alt-text, @next/next/no-img-element */}
-            <img src={GALLERY[lightboxIndex].src} alt={GALLERY[lightboxIndex].alt} className="block max-h-[80vh] max-w-[92vw] md:max-w-[85vw] w-auto h-auto object-contain" />
+            <span className="ae-corner ae-tl" />
+            <span className="ae-corner ae-tr" />
+            <span className="ae-corner ae-bl" />
+            <span className="ae-corner ae-br" />
+            <div className="ae-eyebrow" style={{ justifyContent: "center" }}>
+              Want to learn more?
+            </div>
+            <h3
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 800,
+                color: "var(--ae-text)",
+                marginBottom: "12px",
+              }}
+            >
+              Want a walkthrough or the source code?
+            </h3>
+            <p
+              style={{
+                color: "var(--ae-muted)",
+                fontSize: "14px",
+                marginBottom: "28px",
+              }}
+            >
+              Happy to walk through the design system, component architecture, or deployment setup.
+            </p>
+            <div
+              style={{
+                display: "flex",
+                gap: "14px",
+                justifyContent: "center",
+                flexWrap: "wrap",
+              }}
+            >
+              <a href="/#contact" className="ae-btn-primary">
+                Get in Touch →
+              </a>
+            </div>
           </div>
-          <button className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border bg-background/80 p-2" onClick={next}>▶</button>
-        </div>
-      )}
-
-      {/* CTA */}
-      <section className="container pb-16">
-        <div className="mt-10 rounded-2xl border bg-card p-6 text-center">
-          <p className="opacity-80">Want the code or a walkthrough?</p>
-          <a href="/#contact" className="mt-3 inline-flex cosmic-button">Get in touch</a>
         </div>
       </section>
+
       <Footer />
-    </main>
-  );
-}
-
-function Section({ id, title, children }) {
-  return (
-    <section id={id} className="container py-10">
-      <h2 className="text-xl md:text-2xl font-semibold">{title}</h2>
-      <div className="mt-4 leading-relaxed">{children}</div>
-    </section>
-  );
-}
-
-function Meta({ k, v }) {
-  return (
-    <div className="flex items-center gap-2 mr-6">
-      <span className="text-[11px] uppercase tracking-[0.12em] opacity-70">{k}</span>
-      <span className="text-sm font-medium">{v}</span>
     </div>
   );
 }

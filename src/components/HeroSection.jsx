@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Briefcase, FolderOpen, Gauge } from "lucide-react";
 import headshot from "../assets/headshot.png";
 import resumePDF from "../assets/Riyad_Babayev_Resume.pdf";
 
@@ -26,14 +27,15 @@ export const HeroSection = () => {
       speed: Math.random() * 0.8 + 0.4,
     }));
 
-    const meteors = Array.from({ length: 3 }, () => ({
-      x: Math.random(),
-      y: Math.random() * 0.5,
-      len: Math.random() * 100 + 60,
-      speed: Math.random() * 0.003 + 0.002,
-      progress: Math.random(),
-      active: false,
-      timer: Math.floor(Math.random() * 300 + 100),
+    const meteors = Array.from({ length: 7 }, (_, i) => ({
+      x: Math.random() * 0.7,
+      y: Math.random() * 0.4,
+      tail: Math.random() * 120 + 80,
+      speed: Math.random() * 0.004 + 0.003,
+      // first 3 start active immediately, rest staggered
+      progress: i < 3 ? Math.random() * 0.15 : 0,
+      active: i < 3,
+      timer: i < 3 ? 0 : Math.floor(Math.random() * 200 + 60),
     }));
 
     let frame;
@@ -43,46 +45,53 @@ export const HeroSection = () => {
       tick++;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      const isDark = document.documentElement.classList.contains("dark");
+      const starRGB = isDark ? "232,234,240" : "13,18,32";
+      const meteorTail = isDark ? "232,234,240" : "13,18,32";
+
       // Draw stars with subtle twinkle
       stars.forEach((s) => {
         const alpha = s.a * (0.7 + 0.3 * Math.sin(tick * 0.02 * s.speed + s.phase));
         ctx.beginPath();
         ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(232,234,240,${alpha})`;
+        ctx.fillStyle = `rgba(${starRGB},${alpha})`;
         ctx.fill();
       });
 
       // Draw meteors
+      const diag = Math.sqrt(canvas.width ** 2 + canvas.height ** 2);
+      const angle = Math.PI * 0.25;
       meteors.forEach((m) => {
-        m.timer--;
-        if (m.timer <= 0 && !m.active) {
-          m.active = true;
-          m.x = Math.random() * 0.6 + 0.1;
-          m.y = Math.random() * 0.3;
-          m.progress = 0;
-          m.timer = Math.floor(Math.random() * 400 + 200);
-        }
-        if (m.active) {
-          m.progress += m.speed;
-          if (m.progress >= 1) {
-            m.active = false;
-            return;
+        if (!m.active) {
+          m.timer--;
+          if (m.timer <= 0) {
+            m.active = true;
+            m.x = Math.random() * 0.7;
+            m.y = Math.random() * 0.4;
+            m.progress = 0;
+            m.timer = Math.floor(Math.random() * 300 + 120);
           }
-          const angle = Math.PI * 0.25;
-          const x = m.x * canvas.width + m.progress * m.len * Math.cos(angle);
-          const y = m.y * canvas.height + m.progress * m.len * Math.sin(angle);
-          const x0 = x - m.len * Math.cos(angle);
-          const y0 = y - m.len * Math.sin(angle);
-          const grad = ctx.createLinearGradient(x0, y0, x, y);
-          grad.addColorStop(0, "rgba(108,140,255,0)");
-          grad.addColorStop(1, "rgba(232,234,240,0.85)");
-          ctx.beginPath();
-          ctx.moveTo(x0, y0);
-          ctx.lineTo(x, y);
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
+          return;
         }
+        m.progress += m.speed;
+        // done when head has travelled full diagonal (guaranteed off-screen)
+        if (m.progress * diag > diag + m.tail) {
+          m.active = false;
+          return;
+        }
+        const headX = m.x * canvas.width + m.progress * diag * Math.cos(angle);
+        const headY = m.y * canvas.height + m.progress * diag * Math.sin(angle);
+        const tailX = headX - m.tail * Math.cos(angle);
+        const tailY = headY - m.tail * Math.sin(angle);
+        const grad = ctx.createLinearGradient(tailX, tailY, headX, headY);
+        grad.addColorStop(0, "rgba(108,140,255,0)");
+        grad.addColorStop(1, `rgba(${meteorTail},0.9)`);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(headX, headY);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
       });
 
       frame = requestAnimationFrame(draw);
@@ -143,7 +152,7 @@ export const HeroSection = () => {
           gridTemplateColumns: "1fr auto",
           alignItems: "flex-end",
           gap: "48px",
-          paddingBottom: "80px",
+          paddingBottom: "48px",
           paddingTop: "120px",
         }}
       >
@@ -228,15 +237,11 @@ export const HeroSection = () => {
             height: "540px",
             flexShrink: 0,
             background: "var(--ae-bg)",
+            alignSelf: "flex-end",
+            marginBottom: "120px",
           }}
           className="hidden md:block"
         >
-          {/* Bracket corners */}
-          <span className="ae-corner ae-tl" />
-          <span className="ae-corner ae-tr" />
-          <span className="ae-corner ae-bl" />
-          <span className="ae-corner ae-br" />
-
           {/* Photo */}
           <img
             src={headshot}
@@ -245,7 +250,7 @@ export const HeroSection = () => {
               width: "100%",
               height: "100%",
               objectFit: "contain",
-              objectPosition: "center bottom",
+              objectPosition: "120% bottom",
               display: "block",
               filter: "brightness(0.95) contrast(1.02)",
             }}
@@ -297,34 +302,60 @@ export const HeroSection = () => {
             Riyad Babayev
           </div>
 
-          {/* Stat chips */}
+          {/* Stat cards */}
           <div
             style={{
               position: "absolute",
-              bottom: "-52px",
+              bottom: "-72px",
               left: "50%",
               transform: "translateX(-50%)",
               display: "flex",
-              gap: "6px",
-              whiteSpace: "nowrap",
+              gap: "8px",
+              width: "310px",
             }}
           >
-            {["3+ Internships", "5+ Projects", "M2.0 Dash"].map((chip) => (
-              <span
-                key={chip}
+            {[
+              { icon: <Briefcase size={13} />, value: "3+", label: "Internships" },
+              { icon: <FolderOpen size={13} />, value: "5+", label: "Projects" },
+              { icon: <Gauge size={13} />, value: "M2.0", label: "Dash Racer" },
+            ].map(({ icon, value, label }) => (
+              <div
+                key={label}
                 style={{
-                  fontSize: "9px",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "var(--ae-accent)",
-                  background: "rgba(108,140,255,0.08)",
+                  flex: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "4px",
+                  background: "rgba(108,140,255,0.07)",
                   border: "1px solid var(--ae-border)",
-                  padding: "3px 8px",
+                  padding: "10px 6px 8px",
                 }}
               >
-                {chip}
-              </span>
+                <span style={{ color: "var(--ae-accent)", opacity: 0.8 }}>{icon}</span>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: 900,
+                    color: "var(--ae-text)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {value}
+                </span>
+                <span
+                  style={{
+                    fontSize: "8px",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: "var(--ae-muted)",
+                  }}
+                >
+                  {label}
+                </span>
+              </div>
             ))}
           </div>
         </div>

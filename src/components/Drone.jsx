@@ -210,7 +210,7 @@ export default function Drone() {
           position: "sticky",
           top: 0,
           zIndex: 30,
-          background: "rgba(8,11,18,0.95)",
+          background: "var(--ae-nav-bg)",
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid var(--ae-border)",
         }}

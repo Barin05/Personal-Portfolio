@@ -100,7 +100,22 @@
   }
 
   :root {
-    /* Aerospace design tokens */
+    /* Aerospace design tokens — light mode */
+    --ae-bg: #f0f2f8;
+    --ae-bg2: #e2e6f2;
+    --ae-accent: #3d5af1;
+    --ae-text: #0d1220;
+    --ae-muted: rgba(13, 18, 32, 0.5);
+    --ae-card: rgba(255, 255, 255, 0.85);
+    --ae-border: rgba(61, 90, 241, 0.2);
+    --ae-gridline: rgba(61, 90, 241, 0.10);
+    --ae-nav-bg: rgba(240, 242, 248, 0.93);
+    --ae-mobile-overlay: rgba(240, 242, 248, 0.97);
+    --ae-desc-bg: rgba(220, 224, 240, 0.85);
+  }
+
+  .dark {
+    /* Aerospace design tokens — dark mode */
     --ae-bg: #080b12;
     --ae-bg2: #0d1220;
     --ae-accent: #6c8cff;
@@ -109,6 +124,9 @@
     --ae-card: rgba(13, 18, 32, 0.85);
     --ae-border: rgba(108, 140, 255, 0.2);
     --ae-gridline: rgba(108, 140, 255, 0.10);
+    --ae-nav-bg: rgba(8, 11, 18, 0.93);
+    --ae-mobile-overlay: rgba(8, 11, 18, 0.97);
+    --ae-desc-bg: rgba(13, 18, 32, 0.75);
   }
 
   * {
@@ -455,7 +473,7 @@
 }
 .kestrel-desc {
   position: relative;
-  background: rgba(13,18,32,0.75);
+  background: var(--ae-desc-bg);
   border: 1px solid var(--ae-border);
   padding: 16px 20px;
   font-size: 14px;
@@ -501,7 +519,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ae-accent);
-  background: rgba(8,11,18,0.7);
+  background: var(--ae-desc-bg);
   border: 1px solid var(--ae-accent);
   padding: 4px 10px;
 }

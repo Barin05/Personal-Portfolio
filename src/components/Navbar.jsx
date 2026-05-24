@@ -1,6 +1,6 @@
 import { cn } from "../lib/utils";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 
 const navItems = [
   { name: "About", href: "/#about" },
@@ -12,6 +12,32 @@ const navItems = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  // Init theme from localStorage on every page
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored === "light") {
+      document.documentElement.classList.remove("dark");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+      setIsDark(false);
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+      setIsDark(true);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -29,7 +55,7 @@ export const Navbar = () => {
         zIndex: 40,
         transition: "all 0.3s",
         borderBottom: isScrolled ? "1px solid var(--ae-border)" : "1px solid transparent",
-        background: isScrolled ? "rgba(8,11,18,0.9)" : "transparent",
+        background: isScrolled ? "var(--ae-nav-bg)" : "transparent",
         backdropFilter: isScrolled ? "blur(12px)" : "none",
         padding: isScrolled ? "12px 0" : "20px 0",
       }}
@@ -73,6 +99,24 @@ export const Navbar = () => {
           ))}
         </div>
 
+        {/* Theme toggle */}
+        <button
+          onClick={toggleTheme}
+          style={{
+            color: "var(--ae-text)",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          aria-label="Toggle theme"
+        >
+          {isDark ? <Sun size={25} /> : <Moon size={25} />}
+        </button>
+
         {/* Mobile hamburger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -89,7 +133,7 @@ export const Navbar = () => {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(8,11,18,0.97)",
+            background: "var(--ae-mobile-overlay)",
             backdropFilter: "blur(12px)",
             zIndex: 40,
             display: "flex",

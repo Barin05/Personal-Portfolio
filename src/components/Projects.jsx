@@ -69,7 +69,7 @@ export const ProjectsSection = () => {
               { value: "Mach 2.0", label: "Dash Speed" },
               { value: "1,000 nm", label: "Combat Radius" },
               { value: "62,449 lb", label: "MTOW" },
-              { value: "F100-PW-229", label: "Engine" },
+              { value: "F110-GE-132", label: "Engine" },
             ].map(({ value, label }) => (
               <div key={label} className="kestrel-spec-item">
                 <span className="kestrel-spec-value">{value}</span>

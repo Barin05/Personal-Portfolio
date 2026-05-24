@@ -28,7 +28,7 @@ const AIRCRAFT_SPECS = [
   { label: "Fuselage", value: "600 in long, 72 in dia." },
   { label: "Wing Area (S_ref)", value: "483 ft²" },
   { label: "Aspect Ratio", value: "3.7" },
-  { label: "LE Sweep", value: "40°" },
+  { label: "LE Sweep", value: "30°" },
   { label: "t/c", value: "0.06" },
   { label: "Taper Ratio", value: "0.43" },
   { label: "Ultimate Load Factor", value: "N_ult = 12 (1.5 × 8g)" },
@@ -75,7 +75,7 @@ const PROPULSION_STEPS = [
   },
   {
     title: "Thrust-Weight Matching",
-    body: "Used constraint diagram (dash Mach 2.0, sustained 8°/s turn at FL200, stall speed) to select the design point. Final: AR = 3.7, S_ref = 483 ft², LE sweep = 40°.",
+    body: "Used constraint diagram (dash Mach 2.0, sustained 8°/s turn at FL200, stall speed) to select the design point. Final: AR = 3.7, S_ref = 483 ft², LE sweep = 30°.",
   },
   {
     title: "Survivability Planning",
@@ -368,7 +368,7 @@ export default function SeniorDesign() {
           position: "sticky",
           top: 0,
           zIndex: 30,
-          background: "rgba(8,11,18,0.95)",
+          background: "var(--ae-nav-bg)",
           backdropFilter: "blur(12px)",
           borderBottom: "1px solid var(--ae-border)",
         }}
