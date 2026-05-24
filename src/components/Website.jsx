@@ -117,19 +117,11 @@ export default function Website() {
               objectPosition: "top center",
             }}
           />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(90deg, var(--ae-bg2) 35%, rgba(13,18,32,0.7) 65%, transparent 100%)",
-            }}
-          />
+          <div className="ae-hero-img-fade" />
         </div>
 
         <div
-          className="container mx-auto max-w-5xl"
-          style={{ position: "relative", zIndex: 10, padding: "120px 16px 80px" }}
+          className="container mx-auto max-w-5xl ae-project-hero-content" style={{ position: "relative", zIndex: 10, padding: "120px 16px 80px" }}
         >
           <div className="ae-eyebrow">React · Tailwind · Full-Stack · 2025</div>
 

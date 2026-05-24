@@ -144,7 +144,7 @@ export const HeroSection = () => {
 
       {/* Two-column layout */}
       <div
-        className="container"
+        className="container ae-hero-grid"
         style={{
           position: "relative",
           zIndex: 10,

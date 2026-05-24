@@ -593,3 +593,65 @@
   color: var(--ae-accent);
   text-transform: uppercase;
 }
+
+/* ── Project-detail hero image fade ───────────────────── */
+.ae-hero-img-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--ae-bg2) 35%,
+    rgba(13, 18, 32, 0.7) 65%,
+    transparent 100%
+  );
+}
+
+/* ── Mobile overrides (< 768px) ───────────────────────── */
+@media (max-width: 767px) {
+  /* Hide floating CTA — takes up too much edge space */
+  .ae-floating-cta { display: none; }
+
+  /* Hero — single column, less top padding */
+  .ae-hero-grid {
+    grid-template-columns: 1fr !important;
+    padding-top: 100px !important;
+  }
+
+  /* Hero image fade — cover more of the screen so text stays readable */
+  .ae-hero-img-fade {
+    background: linear-gradient(
+      90deg,
+      var(--ae-bg2) 55%,
+      rgba(13, 18, 32, 0.85) 80%,
+      transparent 100%
+    );
+  }
+
+  /* Kestrel featured block */
+  .kestrel-content { padding: 40px 20px 40px; }
+  .kestrel-img-fade {
+    background: linear-gradient(
+      90deg,
+      var(--ae-bg2) 55%,
+      rgba(13, 18, 32, 0.85) 80%,
+      transparent 100%
+    );
+  }
+  .kestrel-specs { grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Section vertical padding reduction */
+  .ae-grid-bg,
+  section[style*="padding: 72px"] { padding-top: 48px !important; padding-bottom: 48px !important; }
+
+  /* Eyebrow + section title spacing */
+  .ae-section-title { font-size: clamp(1.6rem, 8vw, 2.4rem) !important; }
+
+  /* Sticky tab nav — allow horizontal scroll, no wrap */
+  nav[style*="overflow-x: auto"] { -webkit-overflow-scrolling: touch; }
+
+  /* Project detail hero content — reduce top padding */
+  .ae-project-hero-content {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+  }
+}
